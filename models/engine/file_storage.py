@@ -36,8 +36,9 @@ class FileStorage:
         Serializes __objects to the JSON file (path: __file_path).
         """
         with open(self.__file_path, "w", encoding="utf-8") as json_file:
-            obj_dict = {key: instance.to_dict()
-                        for key, instance in self.__objects.items()}
+            obj_dict = {
+                key: instance.to_dict() for key, instance in self.__objects.items()
+            }
             json.dump(obj_dict, json_file, indent=2)
 
     def reload(self):
@@ -49,6 +50,9 @@ class FileStorage:
             with open(self.__file_path, "r", encoding="utf-8") as json_file:
                 instance_data = json.load(json_file)
             for instance in instance_data.values():
-                self.new(BaseModel(**instance))
+                cls_name = instance["__class__"]
+                del instance["__class__"]
+                cls = globals()[cls_name]
+                self.new(cls(**instance))
         except FileNotFoundError:
             pass
