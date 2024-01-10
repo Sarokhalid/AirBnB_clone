@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
-This module contains the BaseModel class which serves as the base for all other classes.
+This module contains the BaseModel class which
+serves as the base for all other classes.
 """
 
 import uuid
@@ -36,14 +37,16 @@ class BaseModel:
 
     def save(self):
         """
-        Update the updated_at attribute with the current datetime and save the instance.
+        Update the updated_at attribute with the
+        current datetime and save the instance.
         """
         self.updated_at = datetime.now()
         models.storage.save()
 
     def to_dict(self):
         """
-        Return a dictionary containing all keys/values of the instance's __dict__.
+        Return a dictionary containing all
+        keys/values of the instance's __dict__.
         """
         instance_attributes = self.__dict__.copy()
 
@@ -58,4 +61,8 @@ class BaseModel:
         """
         Return a string representation of the BaseModel instance.
         """
-        return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
+        return "[{}] ({}) {}".format(
+                                    self.__class__.__name__,
+                                    self.id,
+                                    self.__dict__
+                                    )
