@@ -7,6 +7,7 @@ import unittest
 
 from models import storage
 from models.base_model import BaseModel
+from models.user import User
 
 
 class TestFileStorage(unittest.TestCase):
@@ -19,7 +20,9 @@ class TestFileStorage(unittest.TestCase):
         Sets up the tests.
         """
         self.model1 = BaseModel()
+        self.user1 = User()
         self.model1.save()
+        self.user1.save()
 
     def tearDown(self):
         """
@@ -37,21 +40,27 @@ class TestFileStorage(unittest.TestCase):
         all_objs = storage.all()
         self.assertIsInstance(all_objs, dict)
         self.assertIn("BaseModel." + self.model1.id, all_objs)
+        self.assertIn("User." + self.user1.id, all_objs)
 
     def test_new(self):
         """
         Tests the new method.
         """
         model2 = BaseModel()
+        user2 = User()
         storage.new(model2)
+        storage.new(user2)
         self.assertIn("BaseModel." + model2.id, storage.all())
+        self.assertIn("User." + user2.id, storage.all())
 
     def test_save(self):
         """
         Tests the save method.
         """
         model2 = BaseModel()
+        user2 = User()
         model2.save()
+        user2.save()
         self.assertTrue(os.path.exists("file.json"))
 
     def test_reload(self):
