@@ -1,5 +1,8 @@
 #!/usr/bin/python3
+
 """defined HBNB console"""
+
+
 
 import cmd
 from models import storage
@@ -46,6 +49,7 @@ class HBNBCommand(cmd.Cmd):
         "Amenity",
         "Review"
     }
+    
 
     def do_quit(self, arg):
         """Quit command to exit the program"""
@@ -59,6 +63,7 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """Do nothing when an empty line is enterd"""
         pass
+
 
     def do_create(self, arg):
         """Usage: creat <class>

@@ -35,7 +35,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(self.model2.name, "My_First_Model")
         self.assertEqual(self.model2.my_number, 89)
 
-        # Test that the created_at and updated_at attributes are datetime objects
+        # Test that the created_at and updated_at are datetime objects
         self.assertIsInstance(self.model1.created_at, datetime)
         self.assertIsInstance(self.model1.updated_at, datetime)
 
