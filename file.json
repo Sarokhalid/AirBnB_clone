@@ -1,62 +1,42 @@
 {
-  "User.31c36952-32f2-4072-bb11-3ffd9a47fe2e": {
+  "User.df28b462-c2d6-4a36-99f0-7a1bdb873a46": {
     "email": "airbnb@mail.com",
     "password": "root",
     "first_name": "Betty",
     "last_name": "Bar",
-    "id": "31c36952-32f2-4072-bb11-3ffd9a47fe2e",
-    "created_at": "2024-01-12T01:38:33.223262",
-    "updated_at": "2024-01-12T01:38:33.223279",
+    "id": "df28b462-c2d6-4a36-99f0-7a1bdb873a46",
+    "created_at": "2024-01-12T01:41:34.413170",
+    "updated_at": "2024-01-12T01:41:34.413183",
     "__class__": "User"
   },
-  "State.4db59e96-823a-4cdc-bc4b-2c5718078314": {
-    "name": "California",
-    "id": "4db59e96-823a-4cdc-bc4b-2c5718078314",
-    "created_at": "2024-01-12T01:38:33.223517",
-    "updated_at": "2024-01-12T01:38:33.223522",
-    "__class__": "State"
+  "User.9374d692-d3cf-4799-b985-3d98bd2d851d": {
+    "email": "airbnb2@mail.com",
+    "password": "root",
+    "first_name": "John",
+    "last_name": "",
+    "id": "9374d692-d3cf-4799-b985-3d98bd2d851d",
+    "created_at": "2024-01-12T01:41:34.413538",
+    "updated_at": "2024-01-12T01:41:34.413544",
+    "__class__": "User"
   },
-  "City.ab5fcdaf-7926-4245-af30-7f4fa4c2f51a": {
-    "state_id": "4db59e96-823a-4cdc-bc4b-2c5718078314",
-    "name": "San Francisco",
-    "id": "ab5fcdaf-7926-4245-af30-7f4fa4c2f51a",
-    "created_at": "2024-01-12T01:38:33.223958",
-    "updated_at": "2024-01-12T01:38:33.223971",
-    "__class__": "City"
+  "User.6aa768c1-7dea-4c3e-b3c1-33cd3eafc062": {
+    "email": "airbnb@mail.com",
+    "password": "root",
+    "first_name": "Betty",
+    "last_name": "Bar",
+    "id": "6aa768c1-7dea-4c3e-b3c1-33cd3eafc062",
+    "created_at": "2024-01-12T01:41:42.787396",
+    "updated_at": "2024-01-12T01:41:42.787405",
+    "__class__": "User"
   },
-  "Amenity.8b9f9935-1796-49fb-bbb4-499a1a650c57": {
-    "name": "Wi-Fi",
-    "id": "8b9f9935-1796-49fb-bbb4-499a1a650c57",
-    "created_at": "2024-01-12T01:38:33.226179",
-    "updated_at": "2024-01-12T01:38:33.226191",
-    "__class__": "Amenity"
-  },
-  "Place.cda81b5d-1628-4553-ba5d-2a08ae735f05": {
-    "city_id": "ab5fcdaf-7926-4245-af30-7f4fa4c2f51a",
-    "user_id": "31c36952-32f2-4072-bb11-3ffd9a47fe2e",
-    "name": "My house",
-    "description": "A beautiful house in San Francisco",
-    "number_rooms": 3,
-    "number_bathrooms": 2,
-    "max_guest": 5,
-    "price_by_night": 200,
-    "latitude": 37.7749,
-    "longitude": -122.4194,
-    "amenity_ids": [
-      "8b9f9935-1796-49fb-bbb4-499a1a650c57"
-    ],
-    "id": "cda81b5d-1628-4553-ba5d-2a08ae735f05",
-    "created_at": "2024-01-12T01:38:33.227059",
-    "updated_at": "2024-01-12T01:38:33.227069",
-    "__class__": "Place"
-  },
-  "Review.6850496f-bea1-423a-8268-976b32593b20": {
-    "place_id": "cda81b5d-1628-4553-ba5d-2a08ae735f05",
-    "user_id": "31c36952-32f2-4072-bb11-3ffd9a47fe2e",
-    "text": "Great place!",
-    "id": "6850496f-bea1-423a-8268-976b32593b20",
-    "created_at": "2024-01-12T01:38:33.227996",
-    "updated_at": "2024-01-12T01:38:33.228004",
-    "__class__": "Review"
+  "User.06fdf4f6-0e41-4cf5-ac77-847a2518c233": {
+    "email": "airbnb2@mail.com",
+    "password": "root",
+    "first_name": "John",
+    "last_name": "",
+    "id": "06fdf4f6-0e41-4cf5-ac77-847a2518c233",
+    "created_at": "2024-01-12T01:41:42.787777",
+    "updated_at": "2024-01-12T01:41:42.787783",
+    "__class__": "User"
   }
 }
