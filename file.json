@@ -1,42 +1,42 @@
 {
-  "User.8e0d7ecb-97e0-497d-8da4-115975ceeef9": {
-    "id": "8e0d7ecb-97e0-497d-8da4-115975ceeef9",
-    "created_at": "2024-01-11T19:20:08.082385",
-    "updated_at": "2024-01-11T19:20:08.082403",
+  "User.bdde5b34-eca5-4c70-88df-a92d1a48907e": {
+    "id": "bdde5b34-eca5-4c70-88df-a92d1a48907e",
+    "created_at": "2024-01-11T20:01:55.985337",
+    "updated_at": "2024-01-11T20:01:55.985360",
     "first_name": "Betty",
     "last_name": "Bar",
     "email": "airbnb@mail.com",
     "password": "root",
     "__class__": "User"
   },
-  "State.000599b6-2b9c-49cc-a8d5-ccf1163cf4ca": {
-    "id": "000599b6-2b9c-49cc-a8d5-ccf1163cf4ca",
-    "created_at": "2024-01-11T19:20:08.082677",
-    "updated_at": "2024-01-11T19:20:08.082682",
+  "State.736a45c2-1339-4c18-91c0-6c2a5324e2bf": {
+    "id": "736a45c2-1339-4c18-91c0-6c2a5324e2bf",
+    "created_at": "2024-01-11T20:01:55.985808",
+    "updated_at": "2024-01-11T20:01:55.985822",
     "name": "California",
     "__class__": "State"
   },
-  "City.b64ad746-208a-477d-a9bf-7b601904dc59": {
-    "id": "b64ad746-208a-477d-a9bf-7b601904dc59",
-    "created_at": "2024-01-11T19:20:08.082963",
-    "updated_at": "2024-01-11T19:20:08.082972",
-    "state_id": "000599b6-2b9c-49cc-a8d5-ccf1163cf4ca",
+  "City.9b2d48b2-e751-4282-8a81-c85d29576733": {
+    "id": "9b2d48b2-e751-4282-8a81-c85d29576733",
+    "created_at": "2024-01-11T20:01:55.988637",
+    "updated_at": "2024-01-11T20:01:55.988675",
+    "state_id": "736a45c2-1339-4c18-91c0-6c2a5324e2bf",
     "name": "San Francisco",
     "__class__": "City"
   },
-  "Amenity.8da72a19-8611-472f-8b48-68f1c3a9d92e": {
-    "id": "8da72a19-8611-472f-8b48-68f1c3a9d92e",
-    "created_at": "2024-01-11T19:20:08.083969",
-    "updated_at": "2024-01-11T19:20:08.083978",
+  "Amenity.75f1cd00-9033-4907-b887-d7fc8cdf1b2a": {
+    "id": "75f1cd00-9033-4907-b887-d7fc8cdf1b2a",
+    "created_at": "2024-01-11T20:01:55.991903",
+    "updated_at": "2024-01-11T20:01:55.991950",
     "name": "Wi-Fi",
     "__class__": "Amenity"
   },
-  "Place.c6d9a40c-22cd-48bb-a9bf-3e4ebf24f680": {
-    "id": "c6d9a40c-22cd-48bb-a9bf-3e4ebf24f680",
-    "created_at": "2024-01-11T19:20:08.084810",
-    "updated_at": "2024-01-11T19:20:08.084822",
-    "city_id": "b64ad746-208a-477d-a9bf-7b601904dc59",
-    "user_id": "8e0d7ecb-97e0-497d-8da4-115975ceeef9",
+  "Place.d382d211-33fb-427d-b9c1-7bad476a5eb6": {
+    "id": "d382d211-33fb-427d-b9c1-7bad476a5eb6",
+    "created_at": "2024-01-11T20:01:55.995581",
+    "updated_at": "2024-01-11T20:01:55.995603",
+    "city_id": "9b2d48b2-e751-4282-8a81-c85d29576733",
+    "user_id": "bdde5b34-eca5-4c70-88df-a92d1a48907e",
     "name": "My house",
     "description": "A beautiful house in San Francisco",
     "number_rooms": 3,
@@ -46,76 +46,16 @@
     "latitude": 37.7749,
     "longitude": -122.4194,
     "amenity_ids": [
-      "8da72a19-8611-472f-8b48-68f1c3a9d92e"
+      "75f1cd00-9033-4907-b887-d7fc8cdf1b2a"
     ],
     "__class__": "Place"
   },
-  "Review.50a446d6-3f1e-4554-b723-77d7f5bb4f0f": {
-    "id": "50a446d6-3f1e-4554-b723-77d7f5bb4f0f",
-    "created_at": "2024-01-11T19:20:08.085752",
-    "updated_at": "2024-01-11T19:20:08.085761",
-    "place_id": "c6d9a40c-22cd-48bb-a9bf-3e4ebf24f680",
-    "user_id": "8e0d7ecb-97e0-497d-8da4-115975ceeef9",
-    "text": "Great place!",
-    "__class__": "Review"
-  },
-  "User.32b391bf-b521-4b51-9d5f-160c17134b08": {
-    "id": "32b391bf-b521-4b51-9d5f-160c17134b08",
-    "created_at": "2024-01-11T19:54:50.530414",
-    "updated_at": "2024-01-11T19:54:50.530437",
-    "first_name": "Betty",
-    "last_name": "Bar",
-    "email": "airbnb@mail.com",
-    "password": "root",
-    "__class__": "User"
-  },
-  "State.3e4a5464-a985-44ba-a50d-9d5734d57675": {
-    "id": "3e4a5464-a985-44ba-a50d-9d5734d57675",
-    "created_at": "2024-01-11T19:54:50.531379",
-    "updated_at": "2024-01-11T19:54:50.531397",
-    "name": "California",
-    "__class__": "State"
-  },
-  "City.3e064886-3eed-4606-8221-c17768bf95af": {
-    "id": "3e064886-3eed-4606-8221-c17768bf95af",
-    "created_at": "2024-01-11T19:54:50.538767",
-    "updated_at": "2024-01-11T19:54:50.539089",
-    "state_id": "3e4a5464-a985-44ba-a50d-9d5734d57675",
-    "name": "San Francisco",
-    "__class__": "City"
-  },
-  "Amenity.b63e425d-5117-4c5b-b135-075dde4bb867": {
-    "id": "b63e425d-5117-4c5b-b135-075dde4bb867",
-    "created_at": "2024-01-11T19:54:50.539815",
-    "updated_at": "2024-01-11T19:54:50.539831",
-    "name": "Wi-Fi",
-    "__class__": "Amenity"
-  },
-  "Place.5b96367b-54bb-45be-a328-586487afd642": {
-    "id": "5b96367b-54bb-45be-a328-586487afd642",
-    "created_at": "2024-01-11T19:54:50.541442",
-    "updated_at": "2024-01-11T19:54:50.541467",
-    "city_id": "3e064886-3eed-4606-8221-c17768bf95af",
-    "user_id": "32b391bf-b521-4b51-9d5f-160c17134b08",
-    "name": "My house",
-    "description": "A beautiful house in San Francisco",
-    "number_rooms": 3,
-    "number_bathrooms": 2,
-    "max_guest": 5,
-    "price_by_night": 200,
-    "latitude": 37.7749,
-    "longitude": -122.4194,
-    "amenity_ids": [
-      "b63e425d-5117-4c5b-b135-075dde4bb867"
-    ],
-    "__class__": "Place"
-  },
-  "Review.7bc800fb-496e-429b-bd08-16e68517f186": {
-    "id": "7bc800fb-496e-429b-bd08-16e68517f186",
-    "created_at": "2024-01-11T19:54:50.542358",
-    "updated_at": "2024-01-11T19:54:50.542369",
-    "place_id": "5b96367b-54bb-45be-a328-586487afd642",
-    "user_id": "32b391bf-b521-4b51-9d5f-160c17134b08",
+  "Review.d53811b1-9c45-40e9-bf34-496192974c95": {
+    "id": "d53811b1-9c45-40e9-bf34-496192974c95",
+    "created_at": "2024-01-11T20:01:55.996483",
+    "updated_at": "2024-01-11T20:01:55.996506",
+    "place_id": "d382d211-33fb-427d-b9c1-7bad476a5eb6",
+    "user_id": "bdde5b34-eca5-4c70-88df-a92d1a48907e",
     "text": "Great place!",
     "__class__": "Review"
   }
