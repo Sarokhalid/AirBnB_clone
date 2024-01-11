@@ -10,66 +10,75 @@ from models.base_model import BaseModel
 
 class TestBaseModel(unittest.TestCase):
     """
-    Defines unit test for the BaseModel class.
+    Test cases for the BaseModel class.
     """
 
     def setUp(self):
         """
-        Sets up the tests.
+        Simple set up method.
         """
-        self.model1 = BaseModel()
-        self.model2 = BaseModel(name="My_First_Model", my_number=89)
+        self.base1 = BaseModel()
+        self.base2 = BaseModel()
 
     def tearDown(self):
         """
-        Tears down the tests.
+        Simple tear down method.
         """
-        pass
+        del self.base1
+        del self.base2
 
     def test_init(self):
         """
-        Tests for correct initialization.
+        Test the __init__ method.
         """
-        self.assertTrue(isinstance(self.model1, BaseModel))
-        self.assertTrue(isinstance(self.model2, BaseModel))
-        self.assertEqual(self.model2.name, "My_First_Model")
-        self.assertEqual(self.model2.my_number, 89)
+        self.assertTrue(isinstance(self.base1, BaseModel))
 
-        # Test that the created_at and updated_at are datetime objects
-        self.assertIsInstance(self.model1.created_at, datetime)
-        self.assertIsInstance(self.model1.updated_at, datetime)
-
-    def test_to_dict(self):
+    def test_attributes(self):
         """
-        Tests the to_dict method.
+        Test if BaseModel class contains the attribute id,
+        created_at, updated_at.
         """
-        model1_dict = self.model1.to_dict()
-        self.assertEqual(model1_dict["__class__"], "BaseModel")
-        self.assertEqual(type(model1_dict["created_at"]), str)
-        self.assertEqual(type(model1_dict["updated_at"]), str)
+        self.assertTrue("id" in self.base1.__dict__)
+        self.assertTrue("created_at" in self.base1.__dict__)
+        self.assertTrue("updated_at" in self.base1.__dict__)
 
-        # Test that the to_dict method includes all attributes
-        self.assertIn("id", model1_dict)
-        self.assertIn("created_at", model1_dict)
-        self.assertIn("updated_at", model1_dict)
+    def test_type_attributes(self):
+        """
+        Test the type of BaseModel class attributes.
+        """
+        self.assertEqual(type(self.base1.id), str)
+        self.assertEqual(type(self.base1.created_at), datetime)
+        self.assertEqual(type(self.base1.updated_at), datetime)
 
     def test_str(self):
         """
-        Tests the __str__ method.
+        Test the str method.
         """
-        model1_str = str(self.model1)
         self.assertEqual(
-            model1_str,
-            "[BaseModel] ({}) {}".format(self.model1.id, self.model1.__dict__),
+            str(self.base1),
+            "[{}] ({}) {}".format(
+                self.base1.__class__.__name__,
+                self.base1.id,
+                self.base1.__dict__
+            ),
         )
 
     def test_save(self):
         """
-        Tests the save method.
+        Test the save method.
         """
-        old_updated_at = self.model1.updated_at
-        self.model1.save()
-        self.assertNotEqual(self.model1.updated_at, old_updated_at)
+        old_updated_at = self.base1.updated_at
+        self.base1.save()
+        self.assertNotEqual(old_updated_at, self.base1.updated_at)
+
+    def test_to_dict(self):
+        """
+        Test the to_dict method.
+        """
+        base_dict = self.base1.to_dict()
+        self.assertEqual(base_dict["__class__"], "BaseModel")
+        self.assertEqual(type(base_dict["created_at"]), str)
+        self.assertEqual(type(base_dict["updated_at"]), str)
 
 
 if __name__ == "__main__":
