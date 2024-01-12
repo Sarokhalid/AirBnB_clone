@@ -1,5 +1,8 @@
 #!/usr/bin/python3
+<<<<<<< HEAD
 """defined HBNB console"""
+=======
+>>>>>>> main
 
 import cmd
 from models import storage
@@ -32,6 +35,7 @@ def parse(arg):
 
 
 class HBNBCommand(cmd.Cmd):
+<<<<<<< HEAD
     """Command interpreter for HBNB
     Attribute:
         prompt (str): the command prompt
@@ -46,20 +50,30 @@ class HBNBCommand(cmd.Cmd):
         "Amenity",
         "Review"
     }
+=======
+    """Command interpreter for HBNB"""
+
+    prompt = "(hbnb) "
+>>>>>>> main
 
     def do_quit(self, arg):
         """Quit command to exit the program"""
         return True
 
     def do_EOF(self, arg):
+<<<<<<< HEAD
         """Exit the program on EOF (ctrl+D)"""
         print("")
+=======
+        "Exit the program on EOF (ctrl+D" ""
+>>>>>>> main
         return True
 
     def emptyline(self):
         """Do nothing when an empty line is enterd"""
         pass
 
+<<<<<<< HEAD
     def do_create(self, arg):
         """Usage: creat <class>
                 Create a new class instance and print its id
@@ -90,4 +104,8 @@ class HBNBCommand(cmd.Cmd):
 
 
 if __name__ == '__main__':
+=======
+
+if __name__ == "__main__":
+>>>>>>> main
     HBNBCommand().cmdloop()
