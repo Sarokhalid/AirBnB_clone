@@ -134,5 +134,55 @@ class HBNBCommand(cmd.Cmd):
             if ar[0] == OBJ.__class__.__name__:
                 count += 1
         print(count)
+
+    def do_update(self, arg):
+        """Usage: update <class> <id> <attribute_name> <atrribute_value> 
+        or <class>.update(<id>, <attribute_name>, <attribute_value>)
+        or <class>.update(<id>, <dictionary>)
+        Update a class instanse of a given id by adding or updating
+        a given attribute  key/value or dictionary"""
+        ar = parse(arg)
+        obj = storage.all()
+        if len(ar) == 0:
+            print("** class name missing **")
+            return False
+        if ar[0] not in HBNBCommand.__classes:
+            print(" ** class doesn't exist **")
+            return False
+        if len(ar) == 1:
+            print("** instance id missing **")
+            return False
+        if "{}.{}".format(ar[0], ar[1]) not in obj.keys():
+            print("** no instance found **")
+            return False
+        if len(ar) == 2:
+            print("** attribute name missing **")
+            return False
+        if len(ar) == 3:
+            try:
+                type(eval(ar[2])) != dict
+            except NameError:
+                print("** value missing **")
+                return False
+            if len(ar) == 4:
+                OBJ = obj["{}.{}".format(ar[0], ar[1])]
+                if ar[2] in OBJ.__class__.__dict__.keys():
+                    vtype = type(OBJ.__class__.__dict__[ar[2]])
+                    OBJ.__dict__[ar[2]] = vtype(ar[3])
+                else:
+                    OBJ.__dict__[ar[2]] = ar[3]
+            elif type(eval(ar[2])) == dict:
+                OBJ = obj["{}.{}".format(ar[0], ar[1])]
+                for z, x in eval(ar[2]).items():
+                    if (z in OBJ.__class__.__dict__.keys() and 
+                            type(OBJ.__class__.__dict__[z]) in
+                            {str, int, float}):
+                        vtype = type(OBJ.__class__.__dict__[z])
+                        OBJ.__dict__[z] = vtype(x)
+                    else:
+                        OBJ.__dict__[z] = x
+                storage.save()
+
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
