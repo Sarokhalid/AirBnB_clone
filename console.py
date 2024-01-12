@@ -1,15 +1,6 @@
 #!/usr/bin/python3
-<<<<<<< HEAD
-<<<<<<< HEAD
-"""defined HBNB console"""
-=======
->>>>>>> main
-=======
 
 """defined HBNB console"""
-
-
->>>>>>> main
 
 import cmd
 from models import storage
@@ -34,18 +25,14 @@ def parse(arg):
             ret = [i.strip(",") for i in lex]
             ret.append(brakets.group())
             return ret
-        else:
-            lex = split(arg[:curly_b.span()[0]])
-            ret = [i.strip(",") for i in lex]
-            ret.append(curly_b.group())
-            return ret
+    else:
+        lex = split(ar[:curly_b.span()[0]])
+        ret = [i.strip(",") for i in lex]
+        ret.append(curly_b.group())
+        return ret
 
 
 class HBNBCommand(cmd.Cmd):
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> main
     """Command interpreter for HBNB
     Attribute:
         prompt (str): the command prompt
@@ -60,55 +47,32 @@ class HBNBCommand(cmd.Cmd):
         "Amenity",
         "Review"
     }
-<<<<<<< HEAD
-=======
-    """Command interpreter for HBNB"""
-
-    prompt = "(hbnb) "
->>>>>>> main
-=======
-    
->>>>>>> main
 
     def do_quit(self, arg):
         """Quit command to exit the program"""
         return True
 
     def do_EOF(self, arg):
-<<<<<<< HEAD
-<<<<<<< HEAD
         """Exit the program on EOF (ctrl+D)"""
         print("")
-=======
-        "Exit the program on EOF (ctrl+D" ""
->>>>>>> main
-=======
-        """Exit the program on EOF (ctrl+D)"""
-        print("")
->>>>>>> main
         return True
 
     def emptyline(self):
         """Do nothing when an empty line is enterd"""
         pass
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> main
     def do_create(self, arg):
         """Usage: creat <class>
                 Create a new class instance and print its id
                 """
-                ar = parse(arg)
-                if len(ar) == 0:
-                    print("** class name missing **")
-                elif ar[0] not in HBNBCommand.__classes:
-                    print("** class doesn't exist **")
-                else:
-                    print(eval(ar[0])().id)
-                    storage.save()
+        ar = parse(arg)
+        if len(ar) == 0:
+            print("** class name missing **")
+        elif ar[0] not in HBNBCommand.__classes:
+            print("** class doesn't exist **")
+        else:
+            print(eval(ar[0])().id)
+            storage.save()
 
     def do_show(self, arg):
         """Usage: show <class> <id> or <class>.show(<id>)"""
@@ -127,11 +91,4 @@ class HBNBCommand(cmd.Cmd):
 
 
 if __name__ == '__main__':
-<<<<<<< HEAD
-=======
-
-if __name__ == "__main__":
->>>>>>> main
-=======
->>>>>>> main
     HBNBCommand().cmdloop()
