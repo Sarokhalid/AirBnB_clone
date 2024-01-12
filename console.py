@@ -119,7 +119,7 @@ class HBNBCommand(cmd.Cmd):
         obj = storage.all()
         if len(ar) == 0:
             print("** class name missing **")
-        elif len(ar[0]) not in HBNBCommand.__classes:
+        elif ar[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
         elif len(ar) == 1:
             print("** instance id missing **")
@@ -181,28 +181,19 @@ class HBNBCommand(cmd.Cmd):
             return False
         if len(ar) == 3:
             try:
-                type(eval(ar[2])) != dict
-            except NameError:
+                attributes = json.loads(ar[2])
+            except json.JSONDecodeError:
                 print("** value missing **")
                 return False
-            if len(ar) == 4:
-                OBJ = obj["{}.{}".format(ar[0], ar[1])]
-                if ar[2] in OBJ.__class__.__dict__.keys():
-                    vtype = type(OBJ.__class__.__dict__[ar[2]])
-                    OBJ.__dict__[ar[2]] = vtype(ar[3])
-                else:
-                    OBJ.__dict__[ar[2]] = ar[3]
-            elif type(eval(ar[2])) == dict:
-                OBJ = obj["{}.{}".format(ar[0], ar[1])]
-                for z, x in eval(ar[2]).items():
-                    if (z in OBJ.__class__.__dict__.keys() and
-                            type(OBJ.__class__.__dict__[z]) in
-                            {str, int, float}):
-                        vtype = type(OBJ.__class__.__dict__[z])
-                        OBJ.__dict__[z] = vtype(x)
-                    else:
-                        OBJ.__dict__[z] = x
-                storage.save()
+            
+            OBJ = obj["{}.{}".format(ar[0], ar[1])]
+            for key, value in attributes.items():
+                OBJ.__dict__[key] = value
+            OBJ.save()
+        elif len(ar) == 4:
+            OBJ = obj["{}.{}".format(ar[0], ar[1])]
+            OBJ.__dict__[ar[2]] = ar[3]
+            OBJ.save()
 
 
 if __name__ == '__main__':
