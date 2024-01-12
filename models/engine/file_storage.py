@@ -43,7 +43,8 @@ class FileStorage:
         """
         with open(self.__file_path, "w", encoding="utf-8") as json_file:
             obj_dict = {
-                key: instance.to_dict() for key, instance in self.__objects.items()
+                key: instance.to_dict()
+                for key, instance in self.__objects.items()
             }
             json.dump(obj_dict, json_file, indent=2)
 
