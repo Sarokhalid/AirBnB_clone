@@ -47,6 +47,27 @@ class HBNBCommand(cmd.Cmd):
         "Amenity",
         "Review"
     }
+    
+    def default(self, arg):
+        """Default behavior for cmd module when input is invalid"""
+        argd = {
+                "all": self.do_all,
+                "show": self.do_show,
+                "destroy": self.do_destroy,
+                "count": self.do_count,
+                "update": self.do_update
+        }
+        match = re.search(r"\.", arg)
+        if match is not None:
+            ar = [arg[:match.span()[1]:]]
+            match = re.search(r"\((.*?)\)", ar[1])
+            if match is not None:
+                command = [ar[1][:match.span()[0]], match.group()[1:-1]]
+                if command[0] in argd.keys():
+                    call = "{} {}".format(ar[0], command[1])
+                    return argd[command[0]](call)
+                print("*** Unknown syntax: {}".format(ar))
+                return False
 
     def do_quit(self, arg):
         """Quit command to exit the program"""
