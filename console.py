@@ -14,6 +14,7 @@ from models.review import Review
 import re
 from shlex import split
 
+
 def parse(arg):
     curly_b = re.search(r"\{(.*?)\]", arg)
     brakets = re.search(r"\[(.*?)\]", arg)
@@ -35,9 +36,8 @@ def parse(arg):
 class HBNBCommand(cmd.Cmd):
     """Command interpreter for HBNB
     Attribute:
-        prompt (str): the command prompt
-    """
-    
+    prompt (str): the command prompt"""
+
     prompt = '(hbnb) '
     __classes = {
         "BaseModel",
@@ -47,19 +47,19 @@ class HBNBCommand(cmd.Cmd):
         "Amenity",
         "Review"
     }
-    
+
     def default(self, arg):
         """Default behavior for cmd module when input is invalid"""
         argd = {
-                "all": self.do_all,
-                "show": self.do_show,
-                "destroy": self.do_destroy,
-                "count": self.do_count,
-                "update": self.do_update
+            "all": self.do_all,
+            "show": self.do_show,
+            "destroy": self.do_destroy,
+            "count": self.do_count,
+            "update": self.do_update
         }
         match = re.search(r"\.", arg)
         if match is not None:
-            ar = [arg[:match.span()[1]:]]
+            ar = [arg[:match.span()[0]], arg[match.span()[1]:]]
             match = re.search(r"\((.*?)\)", ar[1])
             if match is not None:
                 command = [ar[1][:match.span()[0]], match.group()[1:-1]]
@@ -97,11 +97,11 @@ class HBNBCommand(cmd.Cmd):
 
     def do_show(self, arg):
         """Usage: show <class> <id> or <class>.show(<id>)
-            display the string representation of a class instance 
-            of a given id """
+        display the string representation of a class instance
+        of a given id """
         ar = parse(arg)
         obj = storage.all()
-        if len(ar)==0:
+        if len(ar) == 0:
             print("** class doesn't exist **")
         elif ar[0] not in HBNBCommand.__classes:
             print("** class dosen't exist **")
@@ -120,7 +120,7 @@ class HBNBCommand(cmd.Cmd):
         if len(ar) == 0:
             print("** class name missing **")
         elif len(ar[0]) not in HBNBCommand.__classes:
-                print("** class doesn't exist **")
+            print("** class doesn't exist **")
         elif len(ar) == 1:
             print("** instance id missing **")
         elif "{}.{}".format(ar[0], ar[1]) not in obj.keys():
@@ -131,9 +131,9 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, arg):
         """Usage: all or all <class> or <class>.all()
-            Display string representation of all instances 
-            of a given class if no class is specified display
-            all instatiated objects"""
+        Display string representation of all instances
+        of a given class if no class is specified display
+        all instatiated objects"""
         ar = parse(arg)
         if len(ar) > 0 and ar[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
@@ -157,7 +157,7 @@ class HBNBCommand(cmd.Cmd):
         print(count)
 
     def do_update(self, arg):
-        """Usage: update <class> <id> <attribute_name> <atrribute_value> 
+        """Usage: update <class> <id> <attribute_name> <atrribute_value>
         or <class>.update(<id>, <attribute_name>, <attribute_value>)
         or <class>.update(<id>, <dictionary>)
         Update a class instanse of a given id by adding or updating
@@ -195,7 +195,7 @@ class HBNBCommand(cmd.Cmd):
             elif type(eval(ar[2])) == dict:
                 OBJ = obj["{}.{}".format(ar[0], ar[1])]
                 for z, x in eval(ar[2]).items():
-                    if (z in OBJ.__class__.__dict__.keys() and 
+                    if (z in OBJ.__class__.__dict__.keys() and
                             type(OBJ.__class__.__dict__[z]) in
                             {str, int, float}):
                         vtype = type(OBJ.__class__.__dict__[z])
