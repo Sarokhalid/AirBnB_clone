@@ -1,0 +1,124 @@
+{
+  "User.31c36952-32f2-4072-bb11-3ffd9a47fe2e": {
+    "email": "airbnb@mail.com",
+    "password": "root",
+    "first_name": "Betty",
+    "last_name": "Bar",
+    "id": "31c36952-32f2-4072-bb11-3ffd9a47fe2e",
+    "created_at": "2024-01-12T01:38:33.223262",
+    "updated_at": "2024-01-12T01:38:33.223279",
+    "__class__": "User"
+  },
+  "State.4db59e96-823a-4cdc-bc4b-2c5718078314": {
+    "name": "California",
+    "id": "4db59e96-823a-4cdc-bc4b-2c5718078314",
+    "created_at": "2024-01-12T01:38:33.223517",
+    "updated_at": "2024-01-12T01:38:33.223522",
+    "__class__": "State"
+  },
+  "City.ab5fcdaf-7926-4245-af30-7f4fa4c2f51a": {
+    "state_id": "4db59e96-823a-4cdc-bc4b-2c5718078314",
+    "name": "San Francisco",
+    "id": "ab5fcdaf-7926-4245-af30-7f4fa4c2f51a",
+    "created_at": "2024-01-12T01:38:33.223958",
+    "updated_at": "2024-01-12T01:38:33.223971",
+    "__class__": "City"
+  },
+  "Amenity.8b9f9935-1796-49fb-bbb4-499a1a650c57": {
+    "name": "Wi-Fi",
+    "id": "8b9f9935-1796-49fb-bbb4-499a1a650c57",
+    "created_at": "2024-01-12T01:38:33.226179",
+    "updated_at": "2024-01-12T01:38:33.226191",
+    "__class__": "Amenity"
+  },
+  "Place.cda81b5d-1628-4553-ba5d-2a08ae735f05": {
+    "city_id": "ab5fcdaf-7926-4245-af30-7f4fa4c2f51a",
+    "user_id": "31c36952-32f2-4072-bb11-3ffd9a47fe2e",
+    "name": "My house",
+    "description": "A beautiful house in San Francisco",
+    "number_rooms": 3,
+    "number_bathrooms": 2,
+    "max_guest": 5,
+    "price_by_night": 200,
+    "latitude": 37.7749,
+    "longitude": -122.4194,
+    "amenity_ids": [
+      "8b9f9935-1796-49fb-bbb4-499a1a650c57"
+    ],
+    "id": "cda81b5d-1628-4553-ba5d-2a08ae735f05",
+    "created_at": "2024-01-12T01:38:33.227059",
+    "updated_at": "2024-01-12T01:38:33.227069",
+    "__class__": "Place"
+  },
+  "Review.6850496f-bea1-423a-8268-976b32593b20": {
+    "place_id": "cda81b5d-1628-4553-ba5d-2a08ae735f05",
+    "user_id": "31c36952-32f2-4072-bb11-3ffd9a47fe2e",
+    "text": "Great place!",
+    "id": "6850496f-bea1-423a-8268-976b32593b20",
+    "created_at": "2024-01-12T01:38:33.227996",
+    "updated_at": "2024-01-12T01:38:33.228004",
+    "__class__": "Review"
+  },
+  "BaseModel.c8fd306c-72eb-4f1a-8584-6df7ac037c52": {
+    "id": "c8fd306c-72eb-4f1a-8584-6df7ac037c52",
+    "created_at": "2024-01-12T09:59:26.857394",
+    "updated_at": "2024-01-12T09:59:26.857394",
+    "__class__": "BaseModel"
+  },
+  "BaseModel.93eca168-59de-4ddf-8248-44f27848d830": {
+    "id": "93eca168-59de-4ddf-8248-44f27848d830",
+    "created_at": "2024-01-12T11:28:47.821967",
+    "updated_at": "2024-01-12T11:28:47.821967",
+    "__class__": "BaseModel"
+  },
+  "User.7f760c0c-9cca-47ea-851d-8fdc7841cab9": {
+    "email": "",
+    "password": "",
+    "first_name": "",
+    "last_name": "",
+    "id": "7f760c0c-9cca-47ea-851d-8fdc7841cab9",
+    "created_at": "2024-01-12T16:58:17.010721",
+    "updated_at": "2024-01-12T16:58:17.010721",
+    "__class__": "User"
+  },
+  "User.98d7aec6-7062-455e-8e33-9cdc84c4b24d": {
+    "email": "",
+    "password": "",
+    "first_name": "",
+    "last_name": "",
+    "id": "98d7aec6-7062-455e-8e33-9cdc84c4b24d",
+    "created_at": "2024-01-12T17:10:28.358682",
+    "updated_at": "2024-01-12T17:10:28.358682",
+    "__class__": "User"
+  },
+  "User.32d7efe6-fc9e-4a59-a029-27f99eaaddcc": {
+    "email": "",
+    "password": "",
+    "first_name": "",
+    "last_name": "",
+    "id": "32d7efe6-fc9e-4a59-a029-27f99eaaddcc",
+    "created_at": "2024-01-12T17:10:35.678639",
+    "updated_at": "2024-01-12T17:10:35.678639",
+    "__class__": "User"
+  },
+  "User.c64c708f-6530-4840-937f-d09e646752bd": {
+    "email": "",
+    "password": "",
+    "first_name": "",
+    "last_name": "",
+    "id": "c64c708f-6530-4840-937f-d09e646752bd",
+    "created_at": "2024-01-12T17:35:30.156588",
+    "updated_at": "2024-01-12T17:35:30.156588",
+    "__class__": "User"
+  },
+  "User.e2e136c9-16df-435d-b647-277ab569f96e": {
+    "email": "",
+    "password": "",
+    "first_name": "sara",
+    "last_name": "",
+    "id": "e2e136c9-16df-435d-b647-277ab569f96e",
+    "created_at": "2024-01-12T17:35:38.632723",
+    "updated_at": "2024-01-12T17:36:51.124317",
+    "__class__": "User"
+  }
+}

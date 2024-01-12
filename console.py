@@ -119,7 +119,7 @@ class HBNBCommand(cmd.Cmd):
         obj = storage.all()
         if len(ar) == 0:
             print("** class name missing **")
-        elif len(ar[0]) not in HBNBCommand.__classes:
+        elif ar[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
         elif len(ar) == 1:
             print("** instance id missing **")
@@ -193,6 +193,7 @@ class HBNBCommand(cmd.Cmd):
             OBJ = obj["{}.{}".format(ar[0], ar[1])]
             OBJ.__dict__[ar[2]] = ar[3]
             OBJ.save()
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
