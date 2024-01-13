@@ -19,6 +19,9 @@ class FileStorage:
     """
     FileStorage class for handling the serialization
     and deserialization of instances.
+    Attributes:
+        __file_path (str): The Name of the path of database file
+        __objects (dict) : A Dictionary Represinting an instantiated objects.
     """
 
     __file_path = "file.json"
@@ -28,23 +31,23 @@ class FileStorage:
         """
         Returns the dictionary __objects.
         """
-        return self.__objects
+        return FileStorage.__objects
 
     def new(self, obj):
         """
         Sets in __objects the instance with key <instance class name>.id.
         """
         key = obj.__class__.__name__ + "." + obj.id
-        self.__objects[key] = obj
+        FileStorage.__objects[key] = obj
 
     def save(self):
         """
         Serializes __objects to the JSON file (path: __file_path).
         """
-        with open(self.__file_path, "w", encoding="utf-8") as json_file:
+        with open(FileStorage.__file_path, "w", encoding="utf-8") as json_file:
             obj_dict = {
                 key: instance.to_dict()
-                for key, instance in self.__objects.items()
+                for key, instance in FileStorage.__objects.items()
             }
             json.dump(obj_dict, json_file, indent=2)
 
@@ -54,7 +57,8 @@ class FileStorage:
         (__file_path) exists; otherwise, do nothing).
         """
         try:
-            with open(self.__file_path, "r", encoding="utf-8") as json_file:
+            with open(FileStorage.__file_path, "r",
+                      encoding="utf-8") as json_file:
                 instance_data = json.load(json_file)
             for instance in instance_data.values():
                 cls_name = instance["__class__"]
