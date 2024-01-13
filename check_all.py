@@ -113,25 +113,31 @@ def verify_relationships():
             # Verify that the state_id of the City instance exists
             state_id = obj.state_id
             if f"State.{state_id}" not in all_objs:
-                print(f"City instance {obj_id} has an invalid state_id {state_id}")
+                print("City instance {} has an invalid state_id {}"
+                      .format(obj_id, state_id))
 
         elif class_name == "Place":
             # Verify that the city_id and user_id of the Place instance exist
             city_id = obj.city_id
             user_id = obj.user_id
             if f"City.{city_id}" not in all_objs:
-                print(f"Place instance {obj_id} has an invalid city_id {city_id}")
+                print("Place instance {} has an invalid city_id {}"
+                      .format(obj_id, city_id))
+
             if f"User.{user_id}" not in all_objs:
-                print(f"Place instance {obj_id} has an invalid user_id {user_id}")
+                print("Place instance {} has an invalid user_id {}"
+                      .format(obj_id, user_id))
 
         elif class_name == "Review":
             # Verify that the place_id and user_id of the Review instance exist
             place_id = obj.place_id
             user_id = obj.user_id
             if f"Place.{place_id}" not in all_objs:
-                print(f"Review instance {obj_id} has an invalid place_id {place_id}")
+                print("Review instance {} has an invalid place_id {}"
+                      .format(obj_id, place_id))
             if f"User.{user_id}" not in all_objs:
-                print(f"Review instance {obj_id} has an invalid user_id {user_id}")
+                print("Review instance {} has an invalid user_id {}"
+                      .format(obj_id, user_id))
 
 
 if all_classes_available:
