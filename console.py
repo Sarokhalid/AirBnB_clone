@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-"""defined HBNB console"""
+"""defined HBNB program console"""
 
 import cmd
 import json
