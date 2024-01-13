@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 """
 This module contains the BaseModel class which
-serves as the base for all other classes.
+serves as the base for all other classes in The
+AirBnB Project.
 """
 
 import uuid
@@ -18,6 +19,9 @@ class BaseModel:
     def __init__(self, *args, **kwargs):
         """
         Initialize a new BaseModel instance.
+        Args:
+            *args (any): Not Used.
+            **kwargs (dict): Key/Value Pairs of Attributes.
         """
         time_form = "%Y-%m-%dT%H:%M:%S.%f"
         if kwargs:

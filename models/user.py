@@ -8,14 +8,14 @@ from models.base_model import BaseModel
 class User(BaseModel):
     """
     User class that inherits from BaseModel.
+    Attributes:
+        email (str): The E-mail of The Regestered User.
+        password (str): The User Password.
+        first_name (str): User First Name.
+        last_name (str): User Last Name.
     """
 
-    def __init__(self, *args, **kwargs):
-        """
-        Initialize a new User instance.
-        """
-        self.email = ""
-        self.password = ""
-        self.first_name = ""
-        self.last_name = ""
-        super().__init__(*args, **kwargs)
+    email = ""
+    password = ""
+    first_name = ""
+    last_name = ""
