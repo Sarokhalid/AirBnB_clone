@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """
-This module contains the BaseModel class which
-serves as the base for all other classes in The
-AirBnB Project.
+This module defines the BaseModel class,
+which serves as the foundation for all other classes
+in the AirBnB clone project.
 """
 
 import uuid
@@ -13,16 +13,31 @@ import models
 
 class BaseModel:
     """
-    BaseModel defines all common attributes/methods for other classes.
+    The BaseModel class is a superclass that defines common
+    attributes and methods for other classes.
+
+    Attributes:
+        id (str): A unique identifier for each instance, generated using uuid.
+        created_at (datetime): The time the instance was created.
+        updated_at (datetime): The time the instance was last updated.
     """
 
     def __init__(self, *args, **kwargs):
         """
-        Initialize a new BaseModel instance.
+        Initializes a new BaseModel instance. If kwargs are provided,
+        it sets the instance attributes to the values provided.
+        Otherwise, it generates a unique id and sets the created_at and
+        updated_at attributes to the current datetime.
+
         Args:
-            *args (any): Not Used.
-            **kwargs (dict): Key/Value Pairs of Attributes.
+            *args: Variable length argument list. Not used in this method.
+            **kwargs (dict): Key-value pairs of instance attributes.
+
+        Raises:
+            ValueError: If the value associated with the 'created_at' or
+            'updated_at' key is not in the correct format.
         """
+
         time_form = "%Y-%m-%dT%H:%M:%S.%f"
         if kwargs:
             for key, value in kwargs.items():
@@ -41,16 +56,19 @@ class BaseModel:
 
     def save(self):
         """
-        Update the updated_at attribute with the
-        current datetime and save the instance.
+        Updates the 'updated_at' attribute to the current datetime
+        and saves the instance to the storage.
         """
         self.updated_at = datetime.now()
         models.storage.save()
 
     def to_dict(self):
         """
-        Return a dictionary containing all
-        keys/values of the instance's __dict__.
+        Returns a dictionary containing all keys/values of the
+        instance's __dict__, including the class name.
+
+        Returns:
+            dict: A dictionary representation of the instance.
         """
         instance_attributes = self.__dict__.copy()
 
@@ -63,7 +81,11 @@ class BaseModel:
 
     def __str__(self):
         """
-        Return a string representation of the BaseModel instance.
+        Returns a string representation of the BaseModel instance,
+        including the class name, id, and dictionary of attributes.
+
+        Returns:
+            str: A string representation of the instance.
         """
         return "[{}] ({}) {}".format(
                                     self.__class__.__name__,
