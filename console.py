@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-"""defined HBNB console"""
+"""defined HBNB program console"""
 
 import cmd
 import json
@@ -105,9 +105,9 @@ class HBNBCommand(cmd.Cmd):
         ar = parse(arg)
         obj = storage.all()
         if len(ar) == 0:
-            print("** class doesn't exist **")
+            print("** class name missing **")
         elif ar[0] not in HBNBCommand.__classes:
-            print("** class dosen't exist **")
+            print("** class doesn't exist **")
         elif len(ar) == 1:
             print("** instance id missing **")
         elif "{}.{}".format(ar[0], ar[1]) not in obj:
@@ -171,7 +171,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return False
         if ar[0] not in HBNBCommand.__classes:
-            print(" ** class doesn't exist **")
+            print("** class doesn't exist **")
             return False
         if len(ar) == 1:
             print("** instance id missing **")
