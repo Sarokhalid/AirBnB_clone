@@ -38,7 +38,8 @@ def parse(arg):
 class HBNBCommand(cmd.Cmd):
     """Command interpreter for HBNB
     Attribute:
-    prompt (str): the command prompt"""
+        prompt (str): the command prompt
+    """
 
     prompt = '(hbnb) '
     __classes = {
