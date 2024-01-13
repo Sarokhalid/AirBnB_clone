@@ -187,7 +187,7 @@ class HBNBCommand(cmd.Cmd):
             except json.JSONDecodeError:
                 print("** value missing **")
                 return False
-            
+
             OBJ = obj["{}.{}".format(ar[0], ar[1])]
             for key, value in attributes.items():
                 OBJ.__dict__[key] = value
