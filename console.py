@@ -190,7 +190,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** value missing **")
                 return False
         if len(ar) == 4:
-            OBJ  = obj["{}.{}".format(ar[0], ar[1])]
+            OBJ = obj["{}.{}".format(ar[0], ar[1])]
             if ar[2] in OBJ.__class__.__dict__.keys():
                 valtype = type(OBJ.__class__.__dict__[ar[2]])
                 OBJ.__dict__[ar[2]] = valtype(ar[3])
