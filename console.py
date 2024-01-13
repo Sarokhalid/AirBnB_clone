@@ -13,7 +13,6 @@ from models.place import Place
 from models.review import Review
 import re
 from shlex import split
-import json
 
 def parse(arg):
     curly_b = re.search(r"\{(.*?)\]", arg)

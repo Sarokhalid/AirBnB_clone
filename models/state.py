@@ -9,11 +9,8 @@ from models.base_model import BaseModel
 class State(BaseModel):
     """
     State class that inherits from BaseModel.
+    Attributes:
+        name (str): The State Name.
     """
 
-    def __init__(self, *args, **kwargs):
-        """
-        Initialize a new State instance.
-        """
-        self.name = ""
-        super().__init__(*args, **kwargs)
+    name = ""
