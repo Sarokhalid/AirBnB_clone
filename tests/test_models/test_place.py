@@ -41,17 +41,60 @@ class TestPlace(unittest.TestCase):
         description, number_rooms, number_bathrooms, max_guest, price_by_night,
         latitude, longitude, amenity_ids.
         """
-        self.assertTrue("city_id" in self.place1.__dict__)
-        self.assertTrue("user_id" in self.place1.__dict__)
-        self.assertTrue("name" in self.place1.__dict__)
-        self.assertTrue("description" in self.place1.__dict__)
-        self.assertTrue("number_rooms" in self.place1.__dict__)
-        self.assertTrue("number_bathrooms" in self.place1.__dict__)
-        self.assertTrue("max_guest" in self.place1.__dict__)
-        self.assertTrue("price_by_night" in self.place1.__dict__)
-        self.assertTrue("latitude" in self.place1.__dict__)
-        self.assertTrue("longitude" in self.place1.__dict__)
-        self.assertTrue("amenity_ids" in self.place1.__dict__)
+        self.assertTrue(hasattr(Place, "city_id"))
+        self.assertTrue(hasattr(Place, "user_id"))
+        self.assertTrue(hasattr(Place, "name"))
+        self.assertTrue(hasattr(Place, "description"))
+        self.assertTrue(hasattr(Place, "number_rooms"))
+        self.assertTrue(hasattr(Place, "number_bathrooms"))
+        self.assertTrue(hasattr(Place, "max_guest"))
+        self.assertTrue(hasattr(Place, "price_by_night"))
+        self.assertTrue(hasattr(Place, "latitude"))
+        self.assertTrue(hasattr(Place, "longitude"))
+        self.assertTrue(hasattr(Place, "amenity_ids"))
+
+    def test_attribute_initialization(self):
+        """
+        Test if the attributes are initialized with the correct values.
+        """
+        self.assertEqual(self.place1.city_id, "")
+        self.assertEqual(self.place1.user_id, "")
+        self.assertEqual(self.place1.name, "")
+        self.assertEqual(self.place1.description, "")
+        self.assertEqual(self.place1.number_rooms, 0)
+        self.assertEqual(self.place1.number_bathrooms, 0)
+        self.assertEqual(self.place1.max_guest, 0)
+        self.assertEqual(self.place1.price_by_night, 0)
+        self.assertEqual(self.place1.latitude, 0.0)
+        self.assertEqual(self.place1.longitude, 0.0)
+        self.assertEqual(self.place1.amenity_ids, [])
+
+    def test_attribute_assignment(self):
+        """
+        Test if the attributes can be assigned values.
+        """
+        self.place1.city_id = "1234"
+        self.place1.user_id = "5678"
+        self.place1.name = "Test Place"
+        self.place1.description = "A beautiful place."
+        self.place1.number_rooms = 3
+        self.place1.number_bathrooms = 2
+        self.place1.max_guest = 4
+        self.place1.price_by_night = 100
+        self.place1.latitude = 12.34
+        self.place1.longitude = 56.78
+        self.place1.amenity_ids = ["9", "10"]
+        self.assertEqual(self.place1.city_id, "1234")
+        self.assertEqual(self.place1.user_id, "5678")
+        self.assertEqual(self.place1.name, "Test Place")
+        self.assertEqual(self.place1.description, "A beautiful place.")
+        self.assertEqual(self.place1.number_rooms, 3)
+        self.assertEqual(self.place1.number_bathrooms, 2)
+        self.assertEqual(self.place1.max_guest, 4)
+        self.assertEqual(self.place1.price_by_night, 100)
+        self.assertEqual(self.place1.latitude, 12.34)
+        self.assertEqual(self.place1.longitude, 56.78)
+        self.assertEqual(self.place1.amenity_ids, ["9", "10"])
 
     def test_type_attributes(self):
         """
@@ -76,11 +119,11 @@ class TestPlace(unittest.TestCase):
         self.assertEqual(
             str(self.place1),
             "[{}] ({}) {}".format(
-                self.place1.__class__.__name__,
-                self.place1.id,
-                self.place1.__dict__
-            ),
-        )
+                                self.place1.__class__.__name__,
+                                self.place1.id,
+                                self.place1.__dict__
+                                ),
+            )
 
     def test_save(self):
         """
@@ -89,6 +132,7 @@ class TestPlace(unittest.TestCase):
         old_updated_at = self.place1.updated_at
         self.place1.save()
         self.assertNotEqual(old_updated_at, self.place1.updated_at)
+        self.assertTrue(isinstance(self.place1.updated_at, datetime))
 
     def test_to_dict(self):
         """

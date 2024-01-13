@@ -39,7 +39,20 @@ class TestAmenity(unittest.TestCase):
         """
         Test if Amenity class contains the attribute name.
         """
-        self.assertTrue("name" in self.amenity1.__dict__)
+        self.assertTrue(hasattr(Amenity, "name"))
+
+    def test_name_initialization(self):
+        """
+        Test if the name attribute is initialized as an empty string.
+        """
+        self.assertEqual(self.amenity1.name, "")
+
+    def test_name_assignment(self):
+        """
+        Test if the name attribute can be assigned a value.
+        """
+        self.amenity1.name = "Pool"
+        self.assertEqual(self.amenity1.name, "Pool")
 
     def test_type_attributes(self):
         """
@@ -67,6 +80,7 @@ class TestAmenity(unittest.TestCase):
         old_updated_at = self.amenity1.updated_at
         self.amenity1.save()
         self.assertNotEqual(old_updated_at, self.amenity1.updated_at)
+        self.assertTrue(isinstance(self.amenity1.updated_at, datetime))
 
     def test_to_dict(self):
         """

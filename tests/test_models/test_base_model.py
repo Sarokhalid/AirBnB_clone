@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Tst Module for BaseModel
+Test Module for BaseModel
 """
 import unittest
 from datetime import datetime
@@ -57,11 +57,11 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(
             str(self.base1),
             "[{}] ({}) {}".format(
-                self.base1.__class__.__name__,
-                self.base1.id,
-                self.base1.__dict__
-            ),
-        )
+                                self.base1.__class__.__name__,
+                                self.base1.id,
+                                self.base1.__dict__
+                                ),
+            )
 
     def test_save(self):
         """
@@ -76,9 +76,17 @@ class TestBaseModel(unittest.TestCase):
         Test the to_dict method.
         """
         base_dict = self.base1.to_dict()
+        self.assertEqual(type(base_dict), dict)
         self.assertEqual(base_dict["__class__"], "BaseModel")
         self.assertEqual(type(base_dict["created_at"]), str)
         self.assertEqual(type(base_dict["updated_at"]), str)
+        self.assertEqual(base_dict["id"], self.base1.id)
+
+    def test_unique_id(self):
+        """
+        Test if each BaseModel instance is assigned a unique id.
+        """
+        self.assertNotEqual(self.base1.id, self.base2.id)
 
 
 if __name__ == "__main__":

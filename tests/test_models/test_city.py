@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Unittest for City Calss
+Unittest for City Class
 """
 
 import unittest
@@ -39,8 +39,25 @@ class TestCity(unittest.TestCase):
         """
         Test if City class contains the attribute state_id and name.
         """
-        self.assertTrue("state_id" in self.city1.__dict__)
-        self.assertTrue("name" in self.city1.__dict__)
+        self.assertTrue(hasattr(City, "state_id"))
+        self.assertTrue(hasattr(City, "name"))
+
+    def test_attribute_initialization(self):
+        """
+        Test if the state_id and name attributes are
+        initialized as empty strings.
+        """
+        self.assertEqual(self.city1.state_id, "")
+        self.assertEqual(self.city1.name, "")
+
+    def test_attribute_assignment(self):
+        """
+        Test if the state_id and name attributes can be assigned values.
+        """
+        self.city1.state_id = "1234"
+        self.city1.name = "Test City"
+        self.assertEqual(self.city1.state_id, "1234")
+        self.assertEqual(self.city1.name, "Test City")
 
     def test_type_attributes(self):
         """
@@ -56,11 +73,11 @@ class TestCity(unittest.TestCase):
         self.assertEqual(
             str(self.city1),
             "[{}] ({}) {}".format(
-                self.city1.__class__.__name__,
-                self.city1.id,
-                self.city1.__dict__
-            ),
-        )
+                                self.city1.__class__.__name__,
+                                self.city1.id,
+                                self.city1.__dict__
+                                ),
+            )
 
     def test_save(self):
         """
@@ -69,6 +86,7 @@ class TestCity(unittest.TestCase):
         old_updated_at = self.city1.updated_at
         self.city1.save()
         self.assertNotEqual(old_updated_at, self.city1.updated_at)
+        self.assertTrue(isinstance(self.city1.updated_at, datetime))
 
     def test_to_dict(self):
         """

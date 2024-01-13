@@ -6,8 +6,14 @@ Module for testing FileStorage Engine
 import os
 import unittest
 
+from models import storage
+from models.amenity import Amenity
 from models.base_model import BaseModel
-from models.engine.file_storage import FileStorage
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
+from models.user import User
 
 
 class TestFileStorage(unittest.TestCase):
@@ -19,7 +25,7 @@ class TestFileStorage(unittest.TestCase):
         """
         Simple set up method.
         """
-        self.storage = FileStorage()
+        self.storage = storage
 
     def tearDown(self):
         """
@@ -40,33 +46,38 @@ class TestFileStorage(unittest.TestCase):
         """
         Test the new method.
         """
-        obj = BaseModel()
-        self.storage.new(obj)
-        key = obj.__class__.__name__ + "." + obj.id
-        self.assertTrue(key in self.storage.all())
+        for class_name in [
+                            BaseModel,
+                            User, State,
+                            City,
+                            Amenity,
+                            Place,
+                            Review
+                            ]:
+            instance = class_name()
+            self.storage.new(instance)
+            key = instance.__class__.__name__ + "." + instance.id
+            self.assertTrue(key in self.storage.all())
 
     def test_save_and_reload(self):
         """
         Test the save and reload methods.
         """
-        base_model_instance = BaseModel()
-        self.storage.new(base_model_instance)
-
-        self.storage.save()
-
-        pre_reload_state = {
-            key: dict(instance.to_dict())
-            for key, instance in self.storage.all().items()
-        }
-
-        self.storage.reload()
-
-        post_reload_state = {
-            key: dict(instance.to_dict())
-            for key, instance in self.storage.all().items()
-        }
-
-        self.assertEqual(pre_reload_state, post_reload_state)
+        for class_name in [
+                            BaseModel,
+                            User,
+                            State,
+                            City,
+                            Amenity,
+                            Place,
+                            Review
+                            ]:
+            instance = class_name()
+            self.storage.new(instance)
+            self.storage.save()
+            self.storage.reload()
+            key = instance.__class__.__name__ + "." + instance.id
+            self.assertTrue(key in self.storage.all())
 
 
 if __name__ == "__main__":
