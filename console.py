@@ -3,6 +3,7 @@
 """defined HBNB console"""
 
 import cmd
+import json
 from models import storage
 from models.base_model import BaseModel
 from models.user import User
@@ -50,6 +51,7 @@ class HBNBCommand(cmd.Cmd):
 
     def default(self, arg):
         """Default behavior for cmd module when input is invalid"""
+        ar = arg.split()
         argd = {
             "all": self.do_all,
             "show": self.do_show,
@@ -66,7 +68,7 @@ class HBNBCommand(cmd.Cmd):
                 if command[0] in argd.keys():
                     call = "{} {}".format(ar[0], command[1])
                     return argd[command[0]](call)
-        print("*** Unknown syntax: {}".format(ar))
+        print("*** Unknown syntax: {}".format(arg))
         return False
 
     def do_quit(self, arg):
@@ -185,7 +187,7 @@ class HBNBCommand(cmd.Cmd):
             except json.JSONDecodeError:
                 print("** value missing **")
                 return False
-            
+
             OBJ = obj["{}.{}".format(ar[0], ar[1])]
             for key, value in attributes.items():
                 OBJ.__dict__[key] = value
