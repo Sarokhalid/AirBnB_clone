@@ -18,7 +18,7 @@ from shlex import split
 
 def parse(arg):
     """this is function parsing the argument string"""
-    curly_b = re.search(r"\{(.*?)\]", arg)
+    curly_b = re.search(r"\{(.*?)\}", arg)
     brakets = re.search(r"\[(.*?)\]", arg)
     if curly_b is None:
         if brakets is None:
@@ -29,7 +29,7 @@ def parse(arg):
             ret.append(brakets.group())
             return ret
     else:
-        lex = split(ar[:curly_b.span()[0]])
+        lex = split(arg[:curly_b.span()[0]])
         ret = [i.strip(",") for i in lex]
         ret.append(curly_b.group())
         return ret
@@ -151,7 +151,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_count(self, arg):
         """Usage: count <class> or <class>.count()
-            Retrieve the number of instances of given class"""
+        Retrieve the number of instances of given class"""
         ar = parse(arg)
         count = 0
         for OBJ in storage.all().values():
