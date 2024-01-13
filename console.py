@@ -17,6 +17,7 @@ from shlex import split
 
 
 def parse(arg):
+    """this is function parsing the argument string"""
     curly_b = re.search(r"\{(.*?)\]", arg)
     brakets = re.search(r"\[(.*?)\]", arg)
     if curly_b is None:
