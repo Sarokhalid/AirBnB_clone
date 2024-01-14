@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
 State Class Representing a State in AirBnB
+
 """
 
 from .base_model import BaseModel
