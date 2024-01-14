@@ -3,7 +3,7 @@
 A Class Represinting a User Review in AirBnB
 """
 
-from models.base_model import BaseModel
+from .base_model import BaseModel
 
 
 class Review(BaseModel):

@@ -3,7 +3,7 @@
 A Class Represinting a place in AirBnB
 """
 
-from models.base_model import BaseModel
+from .base_model import BaseModel
 
 
 class Place(BaseModel):

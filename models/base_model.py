@@ -69,8 +69,9 @@ class BaseModel:
         """
         instance_attributes = self.__dict__.copy()
 
-        instance_attributes["created_at"] = self.created_at.isoformat()
-        instance_attributes["updated_at"] = self.updated_at.isoformat()
+        for key, value in instance_attributes.items():
+            if isinstance(value, datetime):
+                instance_attributes[key] = value.isoformat()
 
         instance_attributes["__class__"] = self.__class__.__name__
 

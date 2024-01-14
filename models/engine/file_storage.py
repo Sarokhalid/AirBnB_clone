@@ -43,8 +43,10 @@ class FileStorage:
         Adds a new instance to the dictionary of objects.
 
         Args:
-            obj (BaseModel): The instance to be added to the dictionary.
+            obj (Class Instance): The instance to be added to the dictionary.
         """
+        if not obj:
+            return
         key = obj.__class__.__name__ + "." + obj.id
         FileStorage.__objects[key] = obj
 

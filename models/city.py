@@ -3,7 +3,7 @@
 City Class Representing a City in AirBnB
 """
 
-from models.base_model import BaseModel
+from .base_model import BaseModel
 
 
 class City(BaseModel):
