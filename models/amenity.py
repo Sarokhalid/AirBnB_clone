@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """
 Amenity Class Represinting Amenity in AirBnB
-
 """
 from .base_model import BaseModel
 
