@@ -1,4 +1,4 @@
-![alt text](https://github.com/Mohabdo21/AirBnB_clone/blob/main/image.jpeg?raw=true)
+![welcome](https://github.com/Mohabdo21/AirBnB_clone/blob/main/image.jpeg?raw=true)
 
 # AirBnB Clone - The Console
 
@@ -8,7 +8,7 @@ Welcome to the AirBnB clone project! This is the first step towards building our
 This project is done by the team: Sara Khalid Mustafa and Mohannad Babeker.
 
 ## Features
-![alt text](https://github.com/Mohabdo21/AirBnB_clone/blob/main/process.png?raw=true)
+![project stages](https://github.com/Mohabdo21/AirBnB_clone/blob/main/process.png?raw=true)
 
 The project has the following features:
 
@@ -174,4 +174,4 @@ Supported classes:
 -   Place
 -   Review
 
-![alt text](https://github.com/Mohabdo21/AirBnB_clone/blob/main/jsoncrack.com.jpeg?raw=true)
+![repr of the json file](https://github.com/Mohabdo21/AirBnB_clone/blob/main/jsoncrack.com.jpeg?raw=true)
