@@ -3,18 +3,16 @@
 City Class Representing a City in AirBnB
 """
 
-from models.base_model import BaseModel
+from .base_model import BaseModel
 
 
 class City(BaseModel):
     """
     City class that inherits from BaseModel.
+    Attributes:
+        state_id (str): A unique State ID
+        name (str): The name of the City.
     """
 
-    def __init__(self, *args, **kwargs):
-        """
-        Initialize a new City instance.
-        """
-        self.state_id = ""
-        self.name = ""
-        super().__init__(*args, **kwargs)
+    state_id = ""
+    name = ""

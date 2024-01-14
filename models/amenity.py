@@ -2,17 +2,14 @@
 """
 Amenity Class Represinting Amenity in AirBnB
 """
-from models.base_model import BaseModel
+from .base_model import BaseModel
 
 
 class Amenity(BaseModel):
     """
     Amenity class that inherits from BaseModel.
+    Attributes:
+        name (str): The Name of the available Amenity
     """
 
-    def __init__(self, *args, **kwargs):
-        """
-        Initialize a new Amenity instance.
-        """
-        self.name = ""
-        super().__init__(*args, **kwargs)
+    name = ""

@@ -39,9 +39,30 @@ class TestReview(unittest.TestCase):
         """
         Test if Review class contains the attribute place_id, user_id, text.
         """
-        self.assertTrue("place_id" in self.review1.__dict__)
-        self.assertTrue("user_id" in self.review1.__dict__)
-        self.assertTrue("text" in self.review1.__dict__)
+        self.assertTrue(hasattr(Review, "place_id"))
+        self.assertTrue(hasattr(Review, "user_id"))
+        self.assertTrue(hasattr(Review, "text"))
+
+    def test_attribute_initialization(self):
+        """
+        Test if the place_id, user_id, and text attributes are
+        initialized as empty strings.
+        """
+        self.assertEqual(self.review1.place_id, "")
+        self.assertEqual(self.review1.user_id, "")
+        self.assertEqual(self.review1.text, "")
+
+    def test_attribute_assignment(self):
+        """
+        Test if the place_id, user_id, and text attributes can
+        be assigned values.
+        """
+        self.review1.place_id = "1234"
+        self.review1.user_id = "5678"
+        self.review1.text = "Great place!"
+        self.assertEqual(self.review1.place_id, "1234")
+        self.assertEqual(self.review1.user_id, "5678")
+        self.assertEqual(self.review1.text, "Great place!")
 
     def test_type_attributes(self):
         """
@@ -58,11 +79,11 @@ class TestReview(unittest.TestCase):
         self.assertEqual(
             str(self.review1),
             "[{}] ({}) {}".format(
-                self.review1.__class__.__name__,
-                self.review1.id,
-                self.review1.__dict__
-            ),
-        )
+                                self.review1.__class__.__name__,
+                                self.review1.id,
+                                self.review1.__dict__
+                                ),
+            )
 
     def test_save(self):
         """
@@ -71,6 +92,7 @@ class TestReview(unittest.TestCase):
         old_updated_at = self.review1.updated_at
         self.review1.save()
         self.assertNotEqual(old_updated_at, self.review1.updated_at)
+        self.assertTrue(isinstance(self.review1.updated_at, datetime))
 
     def test_to_dict(self):
         """

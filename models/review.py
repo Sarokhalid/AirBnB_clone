@@ -3,19 +3,18 @@
 A Class Represinting a User Review in AirBnB
 """
 
-from models.base_model import BaseModel
+from .base_model import BaseModel
 
 
 class Review(BaseModel):
     """
     Review class that inherits from BaseModel.
+    Attributes:
+        place_id (str): The unique Place ID.
+        user_id (str): The unique User ID.
+        text (str): The Review body.
     """
 
-    def __init__(self, *args, **kwargs):
-        """
-        Initialize a new Review instance.
-        """
-        self.place_id = ""
-        self.user_id = ""
-        self.text = ""
-        super().__init__(*args, **kwargs)
+    place_id = ""
+    user_id = ""
+    text = ""

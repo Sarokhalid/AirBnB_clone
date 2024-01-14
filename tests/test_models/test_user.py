@@ -2,6 +2,7 @@
 """
 Unittest for User Class
 """
+
 import unittest
 from datetime import datetime
 
@@ -39,10 +40,34 @@ class TestUser(unittest.TestCase):
         Test if User class contains the attribute email,
         password, first_name, last_name.
         """
-        self.assertTrue("email" in self.user1.__dict__)
-        self.assertTrue("password" in self.user1.__dict__)
-        self.assertTrue("first_name" in self.user1.__dict__)
-        self.assertTrue("last_name" in self.user1.__dict__)
+        self.assertTrue(hasattr(User, "email"))
+        self.assertTrue(hasattr(User, "password"))
+        self.assertTrue(hasattr(User, "first_name"))
+        self.assertTrue(hasattr(User, "last_name"))
+
+    def test_attribute_initialization(self):
+        """
+        Test if the email, password, first_name, and last_name
+        attributes are initialized as empty strings.
+        """
+        self.assertEqual(self.user1.email, "")
+        self.assertEqual(self.user1.password, "")
+        self.assertEqual(self.user1.first_name, "")
+        self.assertEqual(self.user1.last_name, "")
+
+    def test_attribute_assignment(self):
+        """
+        Test if the email, password, first_name, and last_name
+        attributes can be assigned values.
+        """
+        self.user1.email = "test@example.com"
+        self.user1.password = "password"
+        self.user1.first_name = "Test"
+        self.user1.last_name = "User"
+        self.assertEqual(self.user1.email, "test@example.com")
+        self.assertEqual(self.user1.password, "password")
+        self.assertEqual(self.user1.first_name, "Test")
+        self.assertEqual(self.user1.last_name, "User")
 
     def test_type_attributes(self):
         """
@@ -60,11 +85,11 @@ class TestUser(unittest.TestCase):
         self.assertEqual(
             str(self.user1),
             "[{}] ({}) {}".format(
-                self.user1.__class__.__name__,
-                self.user1.id,
-                self.user1.__dict__
-            ),
-        )
+                                self.user1.__class__.__name__,
+                                self.user1.id,
+                                self.user1.__dict__
+                                ),
+            )
 
     def test_save(self):
         """
@@ -73,6 +98,7 @@ class TestUser(unittest.TestCase):
         old_updated_at = self.user1.updated_at
         self.user1.save()
         self.assertNotEqual(old_updated_at, self.user1.updated_at)
+        self.assertTrue(isinstance(self.user1.updated_at, datetime))
 
     def test_to_dict(self):
         """

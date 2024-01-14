@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Unittest For State Class
+Unittest for State Class
 """
 
 import unittest
@@ -39,7 +39,20 @@ class TestState(unittest.TestCase):
         """
         Test if State class contains the attribute name.
         """
-        self.assertTrue("name" in self.state1.__dict__)
+        self.assertTrue(hasattr(State, "name"))
+
+    def test_attribute_initialization(self):
+        """
+        Test if the name attribute is initialized as an empty string.
+        """
+        self.assertEqual(self.state1.name, "")
+
+    def test_attribute_assignment(self):
+        """
+        Test if the name attribute can be assigned a value.
+        """
+        self.state1.name = "Test State"
+        self.assertEqual(self.state1.name, "Test State")
 
     def test_type_attributes(self):
         """
@@ -54,11 +67,11 @@ class TestState(unittest.TestCase):
         self.assertEqual(
             str(self.state1),
             "[{}] ({}) {}".format(
-                self.state1.__class__.__name__,
-                self.state1.id,
-                self.state1.__dict__
-            ),
-        )
+                                self.state1.__class__.__name__,
+                                self.state1.id,
+                                self.state1.__dict__
+                                ),
+            )
 
     def test_save(self):
         """
@@ -67,6 +80,7 @@ class TestState(unittest.TestCase):
         old_updated_at = self.state1.updated_at
         self.state1.save()
         self.assertNotEqual(old_updated_at, self.state1.updated_at)
+        self.assertTrue(isinstance(self.state1.updated_at, datetime))
 
     def test_to_dict(self):
         """
