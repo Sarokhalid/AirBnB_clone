@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-This module defines the BaseModel class
+This module defines the BaseModel class,
 which serves as the foundation for all other classes
 in the AirBnB clone project.
 """
