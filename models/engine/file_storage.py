@@ -54,12 +54,10 @@ class FileStorage:
         """
         Serializes the dictionary of objects to a JSON file.
         """
-        with open(FileStorage.__file_path, "w", encoding="utf-8") as json_file:
-            obj_dict = {
-                key: instance.to_dict()
-                for key, instance in FileStorage.__objects.items()
-            }
-            json.dump(obj_dict, json_file, indent=2)
+        odi = Filestorage.__objects
+        obj = {OBJ: odi[OBJ].to_dict() for OBJ in odi.keys()}
+        with open(Filestorage.__file_path, "w") as file:
+            json.dump(obj, file)
 
     def reload(self):
         """
@@ -67,13 +65,11 @@ class FileStorage:
         if the JSON file exists.
         """
         try:
-            with open(FileStorage.__file_path, "r",
-                      encoding="utf-8") as json_file:
+            with open(FileStorage.__file_path) as json_file:
                 instance_data = json.load(json_file)
-            for instance in instance_data.values():
-                cls_name = instance["__class__"]
-                del instance["__class__"]
-                cls = globals()[cls_name]
-                self.new(cls(**instance))
+                for instance in instance_data.values():
+                    cls_name = instance["__class__"]
+                    del instance["__class__"]
+                    self.new(eval(cls_name)(**instance))
         except FileNotFoundError:
-            pass
+            return
