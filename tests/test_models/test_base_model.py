@@ -34,6 +34,47 @@ class TestBaseModel(unittest.TestCase):
         """
         self.assertTrue(isinstance(self.base1, BaseModel))
 
+    def test_init_no_args(self):
+        """
+        Test __init__ with no arguments.
+        """
+        base = BaseModel()
+        self.assertEqual(type(base.id), str)
+        self.assertEqual(type(base.created_at), datetime)
+        self.assertEqual(type(base.updated_at), datetime)
+        self.assertEqual(base.created_at, base.updated_at)
+
+    def test_init_with_kwargs(self):
+        """
+        Test __init__ with keyword arguments.
+        """
+        base = BaseModel(
+            id="123",
+            created_at="2022-01-01T00:00:00.000000",
+            updated_at="2022-01-01T00:00:00.000000",
+        )
+        self.assertEqual(base.id, "123")
+        self.assertEqual(base.created_at, datetime(2022, 1, 1))
+        self.assertEqual(base.updated_at, datetime(2022, 1, 1))
+
+    def test_init_with_wrong_time_format(self):
+        """
+        Test __init__ with wrong time format in keyword arguments.
+        """
+        with self.assertRaises(ValueError):
+            BaseModel(
+                created_at="2022-13-01T00:00:00.000000",
+                updated_at="2022-13-01T00:00:00.000000",
+            )
+
+    def test_init_with_extra_attributes(self):
+        """
+        Test __init__ with extra attributes in keyword arguments.
+        """
+        base = BaseModel(attr1="value1", attr2="value2")
+        self.assertEqual(base.attr1, "value1")
+        self.assertEqual(base.attr2, "value2")
+
     def test_attributes(self):
         """
         Test if BaseModel class contains the attribute id,
