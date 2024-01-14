@@ -36,7 +36,7 @@ class TestFileStorage(unittest.TestCase):
             os.remove("file.json")
         except FileNotFoundError:
             pass
-        self.storage._FileStorage__objects.clear()
+        FileStorage._FileStorage__objects = {}
 
     def test_file_path_type(self):
         """
@@ -61,6 +61,48 @@ class TestFileStorage(unittest.TestCase):
         Test the type of storage instance.
         """
         self.assertEqual(type(self.storage), FileStorage)
+
+    def test_all_with_no_objects(self):
+        """
+        Test the all method with no objects in storage.
+        """
+        self.storage._FileStorage__objects = {}
+        self.assertEqual(self.storage.all(), {})
+
+    def test_new_with_none(self):
+        """
+        Test the new method with None as an argument.
+        """
+        self.storage.new(None)
+        self.assertEqual(self.storage.all(), {})
+
+    def test_save_with_no_objects(self):
+        """
+        Test the save method with no objects in storage.
+        """
+        self.storage._FileStorage__objects = {}
+        self.storage.save()
+        self.assertTrue(os.path.exists("file.json"))
+
+    def test_reload_with_no_file(self):
+        """
+        Test the reload method with no file.
+        """
+        try:
+            os.remove("file.json")
+        except FileNotFoundError:
+            pass
+        self.storage.reload()
+        self.assertEqual(self.storage.all(), {})
+
+    def test_reload_with_empty_file(self):
+        """
+        Test the reload method with an empty file.
+        """
+        with open("file.json", "w") as f:
+            pass
+        self.storage.reload()
+        self.assertEqual(self.storage.all(), {})
 
     def test_objects_changes(self):
         """
