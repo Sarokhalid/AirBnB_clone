@@ -59,7 +59,7 @@ class FileStorage:
                 key: instance.to_dict()
                 for key, instance in FileStorage.__objects.items()
             }
-            json.dump(obj_dict, json_file)
+            json.dump(obj_dict, json_file, indent=2)
 
     def reload(self):
         """
