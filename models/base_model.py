@@ -8,8 +8,6 @@ in the AirBnB clone project.
 import uuid
 from datetime import datetime
 
-import models
-
 
 class BaseModel:
     """
@@ -37,6 +35,7 @@ class BaseModel:
             ValueError: If the value associated with the 'created_at' or
             'updated_at' key is not in the correct format.
         """
+        from models import storage
 
         time_form = "%Y-%m-%dT%H:%M:%S.%f"
         if kwargs:
@@ -45,22 +44,20 @@ class BaseModel:
                     self.__dict__[key] = datetime.strptime(value, time_form)
                 elif key != "__class__":
                     self.__dict__[key] = value
-            if "id" not in kwargs:
-                self.id = str(uuid.uuid4())
-            if "created_at" not in kwargs:
-                self.created_at = self.updated_at = datetime.now()
         else:
             self.id = str(uuid.uuid4())
             self.created_at = self.updated_at = datetime.now()
-            models.storage.new(self)
+            storage.new(self)
 
     def save(self):
         """
         Updates the 'updated_at' attribute to the current datetime
         and saves the instance to the storage.
         """
+        from models import storage
+
         self.updated_at = datetime.now()
-        models.storage.save()
+        storage.save()
 
     def to_dict(self):
         """
