@@ -2,6 +2,7 @@
 """
 Test Module for BaseModel
 """
+import os
 import unittest
 from datetime import datetime
 
@@ -49,6 +50,76 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(type(self.base1.id), str)
         self.assertEqual(type(self.base1.created_at), datetime)
         self.assertEqual(type(self.base1.updated_at), datetime)
+
+    def test_unique_time_creation(self):
+        """
+        Test the uniqueness of time creation for each BaseModel instance.
+        """
+        self.assertNotEqual(self.base1.created_at, self.base2.created_at)
+
+    def test_specific_id(self):
+        """
+        Test creating a BaseModel with a specific ID.
+        """
+        base3 = BaseModel()
+        base3.id = "123"
+        self.assertEqual(base3.id, "123")
+
+    def test_string_representation(self):
+        """
+        Test the string representation of a BaseModel.
+        """
+        base_str = str(self.base1)
+        expected_str = "[{}] ({}) {}".format(
+            self.base1.__class__.__name__, self.base1.id, self.base1.__dict__
+        )
+        self.assertEqual(base_str, expected_str)
+
+    def test_save_to_file(self):
+        """
+        Test the save functionality that writes to a file.
+        """
+        self.base1.save()
+        self.assertTrue(os.path.exists("file.json"))
+
+    def test_to_dict_return_type(self):
+        """
+        Test the return type of to_dict method.
+        """
+        base_dict = self.base1.to_dict()
+        self.assertEqual(type(base_dict), dict)
+
+    def test_dynamic_attributes(self):
+        """
+        Test the dynamic creation of attributes in dict.
+        """
+        self.base1.name = "Alx Africa"
+        self.assertEqual(self.base1.name, "Alx Africa")
+
+    def test_create_with_kwargs(self):
+        """
+        Test creating a BaseModel with kwargs.
+        """
+        base_dict = self.base1.to_dict()
+        base2 = BaseModel(**base_dict)
+        self.assertEqual(base2.to_dict(), base_dict)
+
+    def test_create_without_args(self):
+        """
+        Test creating a BaseModel without args.
+        """
+        base3 = BaseModel()
+        self.assertTrue(isinstance(base3, BaseModel))
+
+    def test_wrong_time_format(self):
+        """
+        Test giving kwargs a wrong time format.
+        """
+        with self.assertRaises(ValueError):
+            BaseModel(
+                created_at="2022-13-01T15:38:32.089238",
+                updated_at="2022-13-01T15:38:32.089238",
+            )
 
     def test_str(self):
         """

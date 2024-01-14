@@ -10,6 +10,7 @@ from models import storage
 from models.amenity import Amenity
 from models.base_model import BaseModel
 from models.city import City
+from models.engine.file_storage import FileStorage
 from models.place import Place
 from models.review import Review
 from models.state import State
@@ -36,6 +37,48 @@ class TestFileStorage(unittest.TestCase):
         except FileNotFoundError:
             pass
 
+    def test_file_path_type(self):
+        """
+        Test the type of __file_path attribute.
+        """
+        self.assertEqual(type(self.storage._FileStorage__file_path), str)
+
+    def test_file_path_value(self):
+        """
+        Test the value of __file_path attribute.
+        """
+        self.assertEqual(self.storage._FileStorage__file_path, "file.json")
+
+    def test_objects_type(self):
+        """
+        Test the type of __objects attribute.
+        """
+        self.assertEqual(type(self.storage._FileStorage__objects), dict)
+
+    def test_storage_instance_type(self):
+        """
+        Test the type of storage instance.
+        """
+        self.assertEqual(type(self.storage), FileStorage)
+
+    def test_objects_changes(self):
+        """
+        Test if __objects changes when a new object is added.
+        """
+        initial_objects = self.storage.all().copy()
+        instance = BaseModel()
+        self.storage.new(instance)
+        self.assertNotEqual(self.storage.all(), initial_objects)
+
+    def test_objects_contents(self):
+        """
+        Test the contents of __objects.
+        """
+        instance = BaseModel()
+        self.storage.new(instance)
+        key = instance.__class__.__name__ + "." + instance.id
+        self.assertTrue(key in self.storage.all())
+
     def test_all(self):
         """
         Test the all method.
@@ -48,7 +91,8 @@ class TestFileStorage(unittest.TestCase):
         """
         for class_name in [
                             BaseModel,
-                            User, State,
+                            User,
+                            State,
                             City,
                             Amenity,
                             Place,
