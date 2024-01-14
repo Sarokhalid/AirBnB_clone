@@ -5,6 +5,7 @@ and deserialization of instances to and from a JSON file.
 """
 
 import json
+import os
 
 from models.amenity import Amenity
 from models.base_model import BaseModel
@@ -69,7 +70,10 @@ class FileStorage:
         try:
             with open(FileStorage.__file_path, "r",
                       encoding="utf-8") as json_file:
-                instance_data = json.load(json_file)
+                if os.stat(FileStorage.__file_path).st_size != 0:
+                    instance_data = json.load(json_file)
+                else:
+                    instance_data = {}
             for instance in instance_data.values():
                 cls_name = instance["__class__"]
                 del instance["__class__"]

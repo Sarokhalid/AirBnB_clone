@@ -36,6 +36,7 @@ class TestFileStorage(unittest.TestCase):
             os.remove("file.json")
         except FileNotFoundError:
             pass
+        self.storage._FileStorage__objects.clear()
 
     def test_file_path_type(self):
         """
