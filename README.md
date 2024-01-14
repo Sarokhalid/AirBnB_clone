@@ -34,6 +34,143 @@ This project will help us to learn about:
 
 ## Getting Started
 To get started with this project, clone this repository and navigate to the project directory. Run the console file to start the command interpreter.
+```
+$ git clone https://github.com/Mohabdo21/AirBnB_clone.git
+
+$ cd AirBnB_clone/
+
+$ ./console.py
+```
 
 ## Usage
-Usage instructions will be here.
+Interactive Mode:
+```
+$ ./console.py
+(hbnb) help
+
+Documented commands (type help <topic>):
+========================================
+EOF  all  count  create  destroy  help  quit  show  update
+
+(hbnb)
+```
+
+It Also can run on Non-Interactive mode:
+```
+$ echo "help" | ./console.py
+(hbnb)
+Documented commands (type help <topic>):
+========================================
+EOF  all  count  create  destroy  help  quit  show  update
+
+(hbnb)
+```
+
+## Commands:
+-   `create` - create an object
+-   `show` - show an object (based on id)
+-   `destroy` - destroy an object
+-   `all` - show all objects, of one type or all types
+-   `update` - Updates an instance based on the class name and id
+-   `quit/EOF` - quit the console
+-   `help` - see descriptions of commands
+
+
+To start console type in shell
+
+```
+AirBnB_clone$ ./console.py
+(hbnb)
+
+```
+
+------------------------------------------------------
+
+Create
+======
+
+To create an object use command `create`:
+
+```
+(hbnb) create BaseModel
+
+```
+
+Show
+====
+
+To show an instance based on the class name and id. Ex:
+
+```
+(hbnb) show BaseModel 1234-1234-1234.
+
+```
+
+Destroy
+=======
+
+To Delete an instance of an object using class name and id `destroy <class_name id>`. Ex:
+
+```
+(hbnb) destroy BaseModel 1234-1234-1234.
+
+```
+
+
+All
+===
+
+`all` or `all <class_name>` to display the instance of all classes or the selected class Ex:
+
+```
+(hbnb) all or all State
+
+```
+
+Update
+======
+
+Updates an instance attributes based on the class name and id:
+
+```
+(hbnb) update BaseModel 1234-1234-1234 email "aibnb@holbertonschool.com"
+
+```
+
+Quit
+====
+
+`quit` or `EOF` to terminate the console.
+
+Help
+====
+
+To Display information and usage of available commands:
+
+```
+$ ./console.py
+(hbnb) help
+
+Documented commands (type help <topic>):
+========================================
+EOF  all  count  create  destroy  help  quit  show  update
+
+(hbnb) help all
+Usage: all or all <class> or <class>.all()
+        Display string representation of all instances
+        of a given class if no class is specified display
+        all instatiated objects
+(hbnb)
+```
+
+
+Supported classes:
+==================
+
+-   BaseModel
+-   User
+-   State
+-   City
+-   Amenity
+-   Place
+-   Review
