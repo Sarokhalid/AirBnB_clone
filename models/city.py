@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
 City Class Representing a City in AirBnB
+
 """
 
 from .base_model import BaseModel
