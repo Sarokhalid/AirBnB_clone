@@ -5,8 +5,10 @@ Test Module for BaseModel
 import os
 import unittest
 from datetime import datetime
+from unittest.mock import patch
 
 from models.base_model import BaseModel
+from models.engine.file_storage import FileStorage
 
 
 class TestBaseModel(unittest.TestCase):
@@ -74,6 +76,39 @@ class TestBaseModel(unittest.TestCase):
         base = BaseModel(attr1="value1", attr2="value2")
         self.assertEqual(base.attr1, "value1")
         self.assertEqual(base.attr2, "value2")
+
+    @patch.object(FileStorage, "save")
+    def test_save_calls_storage_save(self, mock_save):
+        """
+        Test that save method calls save method of storage.
+        """
+        bm = BaseModel()
+        bm.save()
+        mock_save.assert_called_once()
+
+    @patch.object(FileStorage, "new")
+    def test_new_instance_calls_storage_new(self, mock_new):
+        """
+        Test that __init__ method calls new method on
+        storage if it’s a new instance.
+        """
+        bm = BaseModel()
+        mock_new.assert_called_once_with(bm)
+
+    @patch.object(FileStorage, "new")
+    def test_existing_instance_does_not_call_storage_new(self, mock_new):
+        """
+        Test that __init__ method does not call new method on
+        storage if it’s not a new instance.
+        """
+        bm = BaseModel(
+            **{
+                "id": "1234",
+                "created_at": "2022-01-01T12:00:00.000000",
+                "updated_at": "2022-01-01T12:00:00.000000",
+            }
+        )
+        mock_new.assert_not_called()
 
     def test_attributes(self):
         """

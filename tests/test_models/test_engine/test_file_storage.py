@@ -5,8 +5,8 @@ Module for testing FileStorage Engine
 
 import os
 import unittest
+from unittest.mock import patch
 
-from time import sleep
 from models import storage
 from models.amenity import Amenity
 from models.base_model import BaseModel
@@ -104,6 +104,20 @@ class TestFileStorage(unittest.TestCase):
             pass
         self.storage.reload()
         self.assertEqual(self.storage.all(), {})
+
+    def test_storage_instance(self):
+        """
+        Test that storage is an instance of FileStorage.
+        """
+        self.assertIsInstance(storage, FileStorage)
+
+    @patch.object(FileStorage, "reload")
+    def test_reload_called_on_storage(self, mock_reload):
+        """
+        Test that reload method is called on storage.
+        """
+        storage.reload()
+        mock_reload.assert_called_once()
 
     def test_objects_changes(self):
         """
