@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
 A Class Represinting a place in AirBnB
+
 """
 
 from .base_model import BaseModel
