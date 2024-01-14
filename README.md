@@ -9,6 +9,8 @@ Welcome to the AirBnB clone project! This is the first step towards building our
 This project is done by the team: Sara Khalid Mustafa and Mohannad Babeker.
 
 ## Features
+![alt text](https://github.com/Mohabdo21/AirBnB_clone/blob/main/process.png?raw=true)
+
 The project has the following features:
 
 - A parent class (BaseModel) that takes care of the initialization, serialization, and deserialization of future instances.
