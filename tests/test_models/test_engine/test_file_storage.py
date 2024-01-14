@@ -6,6 +6,7 @@ Module for testing FileStorage Engine
 import os
 import unittest
 
+from time import sleep
 from models import storage
 from models.amenity import Amenity
 from models.base_model import BaseModel
@@ -165,6 +166,7 @@ class TestFileStorage(unittest.TestCase):
             self.storage.reload()
             key = instance.__class__.__name__ + "." + instance.id
             self.assertTrue(key in self.storage.all())
+            self.assertTrue(os.path.exists("file.json"))
 
 
 if __name__ == "__main__":
