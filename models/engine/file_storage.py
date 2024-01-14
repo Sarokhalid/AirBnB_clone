@@ -2,7 +2,6 @@
 """
 This module defines the FileStorage class, which handles the serialization
 and deserialization of instances to and from a JSON file.
-
 """
 
 import json
