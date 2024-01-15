@@ -3,16 +3,17 @@
 """defined HBNB program console"""
 
 import cmd
-from models import storage
-from models.base_model import BaseModel
-from models.user import User
-from models.state import State
-from models.city import City
-from models.amenity import Amenity
-from models.place import Place
-from models.review import Review
 import re
 from shlex import split
+
+from models import storage
+from models.amenity import Amenity
+from models.base_model import BaseModel
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
+from models.user import User
 
 
 def parse(arg):
@@ -23,12 +24,12 @@ def parse(arg):
         if brakets is None:
             return [i.strip(",") for i in split(arg)]
         else:
-            lex = split(arg[:brakets.span()[0]])
+            lex = split(arg[: brakets.span()[0]])
             ret = [i.strip(",") for i in lex]
             ret.append(brakets.group())
             return ret
     else:
-        lex = split(arg[:curly_b.span()[0]])
+        lex = split(arg[: curly_b.span()[0]])
         ret = [i.strip(",") for i in lex]
         ret.append(curly_b.group())
         return ret
@@ -41,14 +42,7 @@ class HBNBCommand(cmd.Cmd):
     """
 
     prompt = "(hbnb) "
-    __classes = {
-        "BaseModel",
-        "User",
-        "State",
-        "Place",
-        "Amenity",
-        "Review"
-    }
+    __classes = {"BaseModel", "User", "State", "Place", "Amenity", "Review"}
 
     def default(self, arg):
         """Default behavior for cmd module when input is invalid"""
@@ -58,14 +52,14 @@ class HBNBCommand(cmd.Cmd):
             "show": self.do_show,
             "destroy": self.do_destroy,
             "count": self.do_count,
-            "update": self.do_update
+            "update": self.do_update,
         }
         match = re.search(r"\.", arg)
         if match is not None:
             ar = [arg[:match.span()[0]], arg[match.span()[1]:]]
             match = re.search(r"\((.*?)\)", ar[1])
             if match is not None:
-                command = [ar[1][:match.span()[0]], match.group()[1:-1]]
+                command = [ar[1][: match.span()[0]], match.group()[1:-1]]
                 if command[0] in argd.keys():
                     call = "{} {}".format(ar[0], command[1])
                     return argd[command[0]](call)
@@ -101,7 +95,7 @@ class HBNBCommand(cmd.Cmd):
     def do_show(self, arg):
         """Usage: show <class> <id> or <class>.show(<id>)
         display the string representation of a class instance
-        of a given id """
+        of a given id"""
         ar = parse(arg)
         obj = storage.all()
         if len(ar) == 0:
@@ -117,7 +111,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, arg):
         """Usage: destroy <class> <id> or <class>.destroy(<id>)
-            Delete a class instance of a given id"""
+        Delete a class instance of a given id"""
         ar = parse(arg)
         obj = storage.all()
         if len(ar) == 0:
@@ -163,8 +157,8 @@ class HBNBCommand(cmd.Cmd):
         """Usage: update <class> <id> <attribute_name> <atrribute_value>
         or <class>.update(<id>, <attribute_name>, <attribute_value>)
         or <class>.update(<id>, <dictionary>)
-        Update a class instanse of a given id by adding or updating
-        a given attribute  key/value or dictionary"""
+        Update a class instance of a given id by adding or updating
+        a given attribute key/value or dictionary"""
         ar = parse(arg)
         obj = storage.all()
         if len(ar) == 0:
@@ -182,26 +176,25 @@ class HBNBCommand(cmd.Cmd):
         if len(ar) == 2:
             print("** attribute name missing **")
             return False
-        OBJ = obj["{}.{}".format(ar[0], ar[1])]
         if len(ar) == 3:
             try:
-                type(eval(ar[2])) != dict
+                if type(eval(ar[2])) != dict:
+                    print("** value missing **")
+                    return False
             except NameError:
-                print("** value missing **")
-                return False
+                pass  # This means ar[2] is not a dict, which is fine
+        OBJ = obj["{}.{}".format(ar[0], ar[1])]
         if len(ar) == 4:
-            OBJ = obj["{}.{}".format(ar[0], ar[1])]
             if ar[2] in OBJ.__class__.__dict__.keys():
                 valtype = type(OBJ.__class__.__dict__[ar[2]])
                 OBJ.__dict__[ar[2]] = valtype(ar[3])
             else:
                 OBJ.__dict__[ar[2]] = ar[3]
         elif type(eval(ar[2])) == dict:
-            OBJ = obj["{}.{}".format(ar[0], ar[1])]
             for key, value in eval(ar[2]).items():
-                if (key in OBJ.__class__.__dict__.keys() and
-                        type(OBJ.__class__.__dict__[key]) in
-                        {str, int, float}):
+                if key in OBJ.__class__.__dict__.keys() and type(
+                    OBJ.__class__.__dict__[key]
+                ) in {str, int, float}:
                     valtype = type(OBJ.__class__.__dict__[key])
                     OBJ.__dict__[key] = valtype(value)
                 else:
@@ -209,5 +202,5 @@ class HBNBCommand(cmd.Cmd):
         storage.save()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     HBNBCommand().cmdloop()

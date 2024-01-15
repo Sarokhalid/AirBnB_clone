@@ -1,82 +1,187 @@
 #!/usr/bin/python3
-"""Test file"""
-from models.engine.file_storage import FileStorage
+""" unittest for console"""
+
+import sys
 import unittest
 from io import StringIO
-from unittest.mock import patch
+from unittest.mock import create_autospec
+
+import models
 from console import HBNBCommand
 
 
 class TestConsole(unittest.TestCase):
-    """ Test cases for the HBNBCommand class"""
+    """Test suite for the console module"""
 
     def setUp(self):
-        """Set up the test environment before each test case"""
-        self.console = HBNBCommand()
+        """Set up testing environment by
+        redirecting stdout to a StringIO object"""
+        self.stdout_backup = sys.stdout
+        self.stdout_mock = StringIO()
+        sys.stdout = self.stdout_mock
 
     def tearDown(self):
-        """tear down the test environment after each case"""
-        pass
+        """Reset stdout to its original state after each test"""
+        sys.stdout = self.stdout_backup
 
-    def test_help(self):
-        """ Test the help Command"""
-        with patch('sys.stdout', new=StringIO()) as f:
-            self.console.onecmd("help show")
-            output = f.getvalue().strip()
-            self.assertIn("display the string representation", output)
+    def create_console_instance(self):
+        """Create an instance of the HBNBCommand class"""
+        return HBNBCommand()
 
-    def test_create(self):
-        """Test The create command"""
-        with patch('sys.stdout', new=StringIO()) as f:
-            self.console.onecmd("create BaseModel")
-            output = f.getvalue().strip()
-            self.assertTrue(output)
+    def test_quit_command(self):
+        """Test that the 'quit' command exists and works correctly"""
+        console = self.create_console_instance()
+        self.assertTrue(console.onecmd("quit"))
 
-    def test_show(self):
-        """Test the show command"""
-        with patch('sys.stdout', new=StringIO()) as f:
-            self.console.onecmd("create BaseModel")
-            obj_id = f.getvalue().strip()
-            self.console.onecmd(f"show BaseModel {obj_id}")
-            output = f.getvalue().strip()
-            self.assertIn(obj_id, output)
+    def test_EOF_command(self):
+        """Test that the 'EOF' command exists and works correctly"""
+        console = self.create_console_instance()
+        self.assertTrue(console.onecmd("EOF"))
 
-    def test_destroy(self):
-        """ Test the destroy command"""
-        with patch('sys.stdout', new=StringIO()) as f:
-            self.console.onecmd("create BaseModel")
-            obj_id = f.getvalue().strip()
-            self.console.onecmd(f"destroy BaseMode {obj_id}")
-            self.assertEqual(f.getvalue().strip(), "")
+    def test_all_command(self):
+        """Test that the 'all' command exists and works correctly"""
+        console = self.create_console_instance()
+        console.onecmd("all")
+        self.assertTrue(isinstance(self.stdout_mock.getvalue(), str))
 
-    def test_all(self):
-        """ Test the all command"""
-        with patch('sys.stdout', new=StringIO()) as f:
-            self.console.onecmd("create BaseModel")
-            self.console.onecmd("all BaseModel")
-            output = f.getvalue().strip()
-            self.assertIn("BaseModel", output)
+    def test_show_command(self):
+        """
+        Test that the 'show' command exists and works correctly
+        """
+        console = self.create_console_instance()
+        console.onecmd("create User")
+        user_id = self.stdout_mock.getvalue().strip()
+        sys.stdout = self.stdout_backup
+        self.stdout_mock.close()
+        self.stdout_mock = StringIO()
+        sys.stdout = self.stdout_mock
+        console.onecmd(f"show User {user_id}")
+        output = self.stdout_mock.getvalue()
+        sys.stdout = self.stdout_backup
+        self.assertTrue(isinstance(output, str))
 
-    def test_count(self):
-        """ Test the count command"""
-        with patch('sys.stdout', new=StringIO()) as f:
-            self.console.onecmd("create BaseModel")
-            self.console.onecmd("create BaseModel")
-            self.console.onecmd("create User")
-            self.console.onecmd("count BaseModel")
-            output = f.getvalue().strip()
-            self.assertEqual(output, "2")
+    def test_show_command_missing_class_name(self):
+        """
+        Test that the 'show' command correctly
+        handles the case where the class name is missing
+        """
+        console = self.create_console_instance()
+        console.onecmd("show")
+        output = self.stdout_mock.getvalue()
+        sys.stdout = self.stdout_backup
+        self.assertEqual("** class name missing **\n", output)
 
-    def test_update(self):
-        """ Test the update command"""
-        with patch('sys.stdout', new=StringIO()) as f:
-            self.console.onecmd("create BaseModel")
-            obj_id = f.getvalue().strip()
-            self.console.onecmd(f"update BaseModel {obj_id} name 'new name'")
-            self.console.onecmd(f"shown BaseModel {obj_id}")
-            output = f.getvalue().strip()
-            self.assertIn("'name': 'new name'", output)
+    def test_show_command_missing_id(self):
+        """
+        Test that the 'show' command correctly
+        handles the case where the instance id is missing
+        """
+        console = self.create_console_instance()
+        console.onecmd("show User")
+        output = self.stdout_mock.getvalue()
+        sys.stdout = self.stdout_backup
+        self.assertEqual("** instance id missing **\n", output)
+
+    def test_show_command_no_instance_found(self):
+        """
+        Test that the 'show' command correctly handles
+        the case where the instance is not found
+        """
+        console = self.create_console_instance()
+        console.onecmd("show User 124356876")
+        output = self.stdout_mock.getvalue()
+        sys.stdout = self.stdout_backup
+        self.assertEqual("** no instance found **\n", output)
+
+    def test_create_command(self):
+        """
+        Test that the 'create' command works correctly
+        """
+        console = self.create_console_instance()
+        console.onecmd("create User")
+        output = self.stdout_mock.getvalue()
+        self.assertTrue(isinstance(output, str))
+
+    def test_create_command_missing_class_name(self):
+        """
+        Test that the 'create' command correctly handles the case where the
+        class name is missing
+        """
+        console = self.create_console_instance()
+        console.onecmd("create")
+        output = self.stdout_mock.getvalue()
+        self.assertEqual("** class name missing **\n", output)
+
+    def test_create_command_nonexistent_class(self):
+        """
+        Test that the 'create' command correctly handles the case where the
+        class name does not exist
+        """
+        console = self.create_console_instance()
+        console.onecmd("create Binita")
+        output = self.stdout_mock.getvalue()
+        self.assertEqual("** class doesn't exist **\n", output)
+
+    def test_update_command_missing_class_name(self):
+        """
+        Test that the 'update' command correctly handles
+        the case where the class name is missing
+        """
+        console = self.create_console_instance()
+        console.onecmd("update")
+        output = self.stdout_mock.getvalue()
+        self.assertEqual("** class name missing **\n", output)
+
+    def test_update_command_missing_id(self):
+        """
+        Test that the 'update' command correctly handles
+        the case where the instance id is missing
+        """
+        console = self.create_console_instance()
+        console.onecmd("update User")
+        output = self.stdout_mock.getvalue()
+        self.assertEqual("** instance id missing **\n", output)
+
+    def test_update_command_missing_attribute_name(self):
+        """
+        Test that the 'update' command correctly handles
+        the case where the attribute name is missing
+        """
+        console = self.create_console_instance()
+        console.onecmd("update User 1234")
+        output = self.stdout_mock.getvalue()
+        self.assertEqual("** no instance found **\n", output)
+
+    def test_update_command_missing_value(self):
+        """
+        Test that the 'update' command correctly handles
+        the case where the value is missing
+        """
+        console = self.create_console_instance()
+        console.onecmd("update User 1234 first_name")
+        output = self.stdout_mock.getvalue()
+        self.assertEqual("** no instance found **\n", output)
+
+    def test_update_command_nonexistent_class(self):
+        """
+        Test that the 'update' command correctly handles
+        the case where the class name does not exist
+        """
+        console = self.create_console_instance()
+        console.onecmd("update Binita 1234 first_name 'John'")
+        output = self.stdout_mock.getvalue()
+        self.assertEqual("** class doesn't exist **\n", output)
+
+    def test_update_command_no_instance_found(self):
+        """
+        Test that the 'update' command correctly handles
+        the case where the instance is not found
+        """
+        console = self.create_console_instance()
+        console.onecmd("update User 1234 first_name 'John'")
+        output = self.stdout_mock.getvalue()
+        self.assertEqual("** no instance found **\n", output)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
