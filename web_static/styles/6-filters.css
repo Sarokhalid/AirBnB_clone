@@ -1,0 +1,91 @@
+/*
+ * * === Filters class style ===
+ * */
+
+/* Filters style */
+.filters {
+    background-color: #fff;
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+    display: flex;
+    height: 70px;
+    width: 100%;
+    align-items: center;
+}
+section.filters > button {
+  background: #ff5a5f;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 18px;
+  height: 48px;
+  margin-right: 30px;
+  margin-left: auto;
+  width: 20%;
+  opacity: 1;
+}
+section.filters button:hover {
+  opacity: 0.9;
+}
+/* Locations and amenities style */
+.locations,
+.amenities {
+  padding-left: 30px;
+  height: 100%;
+  width: 25%;
+}
+/* Locations border */
+.locations {
+  border-right: 1px solid #DDDDDD;
+}
+/* Locations and amenities hover opacity */
+.locations > h3
+.amenities > h3 {
+  font-weight: 600;
+  margin: 12px 0 5px 0;
+}
+.locations > h4,
+.amenities > h4 {
+    font-weight: 400;
+    font-size: 14px;
+    margin: 0 0 5px 0;
+}
+/* Locations and amenities popover menu */
+.popover {
+  background-color: #fafafa;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  display: none;
+  position: relative;
+  width: 100%;
+  left: -30px;
+  padding: 10px 30px 40px 0;
+  margin-top: 16px;
+  z-index: 1;
+}
+/* Locations and amenities popover hover */
+.popover,
+.popover ul {
+  list-style-type: none;
+}
+.locations:hover > .popover {
+    display: block;
+}
+.amenities:hover > .popover {
+    display: block;
+}
+.popover h2 {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+.locations > .popover > li {
+    margin-bottom: 30px;
+    margin-left: 30px;
+}
+.locations > .popover > li > ul {
+    padding-left: 20px;
+}
+.amenities > .popover > li {
+    margin-left: 50px;
+    margin-bottom: 10px;
+}															  
